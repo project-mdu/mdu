@@ -1,0 +1,40 @@
+<RCC>
+    <qresource prefix="/">
+        <file>interface/RootLayout.qml</file>
+        <file>interface/MainWindow.qml</file>
+        <file>interface/HeaderBar.qml</file>
+        <file>interface/pages/Downloads.qml</file>
+        <file>interface/components/DownloadItem.qml</file>
+        <file>interface/models/TypesModel.qml</file>
+        <file>interface/models/ActiveDownloadsModel.qml</file>
+        <file>interface/components/MenuItems.qml</file>
+        <file>interface/components/MenuSection.qml</file>
+        <file>image/audio.png</file>
+        <file>image/video.png</file>
+        <file>icons/ap2.ico</file>
+        <file>icons/app.ico</file>
+        <file>image/app.png</file>
+        <file>image/qtlogo.png</file>
+        <file>fonts/en/IBMPlexSans-Bold.ttf</file>
+        <file>fonts/en/IBMPlexSans-BoldItalic.ttf</file>
+        <file>fonts/en/IBMPlexSans-ExtraLight.ttf</file>
+        <file>fonts/en/IBMPlexSans-ExtraLightItalic.ttf</file>
+        <file>fonts/en/IBMPlexSans-Italic.ttf</file>
+        <file>fonts/en/IBMPlexSans-Light.ttf</file>
+        <file>fonts/en/IBMPlexSans-LightItalic.ttf</file>
+        <file>fonts/en/IBMPlexSans-Medium.ttf</file>
+        <file>fonts/en/IBMPlexSans-MediumItalic.ttf</file>
+        <file>fonts/en/IBMPlexSans-Regular.ttf</file>
+        <file>fonts/en/IBMPlexSans-SemiBold.ttf</file>
+        <file>fonts/en/IBMPlexSans-SemiBoldItalic.ttf</file>
+        <file>fonts/en/IBMPlexSans-Thin.ttf</file>
+        <file>fonts/en/IBMPlexSans-ThinItalic.ttf</file>
+        <file>fonts/th/IBMPlexSansThaiLooped-Bold.ttf</file>
+        <file>fonts/th/IBMPlexSansThaiLooped-ExtraLight.ttf</file>
+        <file>fonts/th/IBMPlexSansThaiLooped-Light.ttf</file>
+        <file>fonts/th/IBMPlexSansThaiLooped-Medium.ttf</file>
+        <file>fonts/th/IBMPlexSansThaiLooped-Regular.ttf</file>
+        <file>fonts/th/IBMPlexSansThaiLooped-SemiBold.ttf</file>
+        <file>fonts/th/IBMPlexSansThaiLooped-Thin.ttf</file>
+    </qresource>
+</RCC>
