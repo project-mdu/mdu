@@ -104,6 +104,7 @@ Rectangle {
                         text: modelData
                         color: parent.checked ? "#ffffff" : "#cccccc"
                         font.pixelSize: 12
+                        font.weight: 600
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
 

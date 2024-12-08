@@ -18,6 +18,15 @@ Page {
         loadDownloadHistory()
     }
 
+    Components.DownloadModal {
+        id: downloadModal
+
+        onAccepted: {
+            // Handle download configuration
+            console.log("Starting download with config")
+        }
+    }
+
     Connections {
         target: downloadManager
 
@@ -88,6 +97,7 @@ Page {
                 Label {
                     text: "Downloads"
                     font.pixelSize: 16
+                    font.weight: 600
                     color: "#ffffff"
                     Layout.alignment: Qt.AlignVCenter
                 }
@@ -121,7 +131,7 @@ Page {
 
                     onClicked: {
                         // TODO: Implement add task functionality
-                        console.log("Add task clicked")
+                        onClicked: downloadModal.open()
                     }
                 }
 

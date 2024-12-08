@@ -36,5 +36,6 @@
         <file>fonts/th/IBMPlexSansThaiLooped-Regular.ttf</file>
         <file>fonts/th/IBMPlexSansThaiLooped-SemiBold.ttf</file>
         <file>fonts/th/IBMPlexSansThaiLooped-Thin.ttf</file>
+        <file>interface/components/DownloadModal.qml</file>
     </qresource>
 </RCC>
