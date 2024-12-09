@@ -37,5 +37,12 @@
         <file>fonts/th/IBMPlexSansThaiLooped-SemiBold.ttf</file>
         <file>fonts/th/IBMPlexSansThaiLooped-Thin.ttf</file>
         <file>interface/components/DownloadModal.qml</file>
+        <file>interface/pages/StemExtractor.qml</file>
+        <file>interface/pages/Converter.qml</file>
+        <file>interface/components/FilesList.qml</file>
+        <file>interface/components/ProgressPanel.qml</file>
+        <file>interface/components/SettingsPopup.qml</file>
+        <file>interface/components/FileItem.qml</file>
+        <file>interface/components/ExtractorControls.qml</file>
     </qresource>
 </RCC>

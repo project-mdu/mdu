@@ -1,7 +1,8 @@
 // MainWindow.qml
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Basic
 import "." as Local
 import "pages" as Pages
 
@@ -9,31 +10,40 @@ Rectangle {
     id: mainWindow
     color: "#1c1c1c"
 
+    property string currentPage: "downloadsPage"
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
 
-        // Main content
         Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             color: "#252525"
 
-            RowLayout {
+            Loader {
+                id: pageLoader
                 anchors.fill: parent
-                spacing: 0
-                // Main content area
-                StackView {
-                    id: stackView
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    initialItem: downloadsPage
-                    Component {
-                        id: downloadsPage
-                        Pages.Downloads {}
-                    }
-                }
+                source: "pages/Downloads.qml"
             }
         }
+    }
+
+    function switchPage(pageName) {
+        let page = ""
+        switch(pageName.toLowerCase()) {
+            case "downloader":
+                page = "pages/Downloads.qml"
+                currentPage = "downloadsPage"
+                break
+            case "converter":
+                page = "pages/Converter.qml"
+                currentPage = "converterPage"
+                break
+            case "stem extractor":
+                page = "pages/StemExtractor.qml"
+                currentPage = "stemExtractorPage"
+                break
+        }
+        pageLoader.setSource(page)
     }
 }

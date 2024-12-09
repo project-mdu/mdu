@@ -3,6 +3,28 @@ TARGET = mdu
 TEMPLATE = app
 VERSION = 1.0.0
 
+# LibTorch path configuration
+PYTORCH_DIR = $$(PYTORCH_DIR)
+isEmpty(PYTORCH_DIR) {
+    error("PYTORCH_DIR environment variable is not set. Please set it to your libtorch installation directory.")
+}
+
+# Verify LibTorch directory exists
+!exists($$PYTORCH_DIR) {
+    error("LibTorch directory does not exist: $$PYTORCH_DIR")
+}
+
+# Verify key LibTorch subdirectories
+!exists($$PYTORCH_DIR/include) {
+    error("LibTorch include directory not found: $$PYTORCH_DIR/include")
+}
+!exists($$PYTORCH_DIR/lib) {
+    error("LibTorch lib directory not found: $$PYTORCH_DIR/lib")
+}
+
+# Print out the detected LibTorch path (useful for debugging)
+message("Using LibTorch from: $$PYTORCH_DIR")
+
 # Qt configuration
 QT += core gui quick quickcontrols2 gui-private quickwidgets widgets concurrent
 CONFIG += c++17 skip_target_version_ext
@@ -11,8 +33,47 @@ CONFIG -= debug_and_release debug_and_release_target
 # Define version
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
+# LibTorch configuration
+INCLUDEPATH += \
+    $$PYTORCH_DIR/include \
+    $$PYTORCH_DIR/include/torch/csrc/api/include
+
+# Library paths
+LIBS += -L$$PYTORCH_DIR/lib
+
+# Dynamically find and link .lib files for Windows
+win32 {
+    # Find all .lib files in the library directory
+    PYTORCH_LIBS = $$files($$PYTORCH_DIR/lib/*.lib)
+
+    # Add all found .lib files to LIBS
+    LIBS += $$PYTORCH_LIBS
+
+    # Print out the libraries being linked
+    !isEmpty(PYTORCH_LIBS) {
+        message("Linking PyTorch libraries:")
+        for(lib, PYTORCH_LIBS) {
+            message($$lib)
+        }
+    }
+}
+
+# Fallback library linking
+isEmpty(PYTORCH_LIBS) {
+    LIBS += \
+        -ltorch \
+        -lc10 \
+        -lprotobuf-lite
+}
+
+# Compiler flags for LibTorch
+QMAKE_CXXFLAGS += \
+    -D_GLIBCXX_USE_CXX11_ABI=0 \
+    -DUSE_PYTORCH
+
 # Source files
 SOURCES += \
+    src/core/stemextractor/stemextractor.cpp \
     src/core/ytdlphelper.cpp \
     src/gui/aboutqt.cpp \
     src/gui/windowcontroller.cpp \
@@ -25,6 +86,7 @@ SOURCES += \
 # Header files
 HEADERS += \
     src/core/downloadmanager.hpp \
+    src/core/stemextractor/stemextractor.hpp \
     src/core/ytdlphelper.hpp \
     src/gui/aboutqt.hpp \
     src/gui/mainwindow.hpp \
@@ -120,6 +182,8 @@ win32 {
             $(COPY_FILE) \"$$DEPLOY_TARGET\" \"$$DEPLOY_DIR\" && \
             @echo Running windeployqt... && \
             windeployqt --release --no-translations --no-system-d3d-compiler \"$$DEPLOY_DIR/$$TARGET.exe\" && \
+            @echo Copying LibTorch dependencies... && \
+            $(COPY_FILE) \"$$PYTORCH_DIR/lib/*.dll\" \"$$DEPLOY_DIR\" && \
             @echo Copying additional files... && \
             $(COPY_FILE) \"$$PWD/README.md\" \"$$DEPLOY_DIR\" && \
             $(COPY_FILE) \"$$PWD/LICENSE\" \"$$DEPLOY_DIR\" && \

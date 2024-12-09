@@ -1,14 +1,18 @@
-// interface/HeaderBar.qml
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
-import QtQuick.Controls.Basic 2.15
+// HeaderBar.qml
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Basic
 import "./components" as Components
+
 Rectangle {
     id: headerbar
     color: "#2d2d2d"
     height: 32
     z: 100
+
+    // Add property at Rectangle scope
+    property int currentIndex: 0
 
     Behavior on color {
         ColorAnimation { duration: 150 }
@@ -71,7 +75,6 @@ Rectangle {
                     if (mainMenu.isOpen) {
                         mainMenu.close()
                     } else {
-                        // Map the button's position to the global coordinate space
                         var pos = menuButton.mapToItem(null, 0, 0)
                         mainMenu.open(pos.x, pos.y + menuButton.height)
                     }
@@ -96,21 +99,18 @@ Rectangle {
                 model: ["Downloader", "Converter", "Stem Extractor"]
 
                 Button {
+                    id: navButton
                     Layout.preferredWidth: 100
                     Layout.preferredHeight: 32
                     flat: true
 
                     contentItem: Text {
                         text: modelData
-                        color: parent.checked ? "#ffffff" : "#cccccc"
+                        color: navButton.checked ? "#ffffff" : "#cccccc"
                         font.pixelSize: 12
                         font.weight: 600
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
-
-                        Behavior on color {
-                            ColorAnimation { duration: 150 }
-                        }
                     }
 
                     background: Rectangle {
@@ -119,17 +119,26 @@ Rectangle {
                             width: parent.width
                             height: 2
                             anchors.bottom: parent.bottom
-                            color: parent.parent.checked ? "#ffffff" : "transparent"
-
-                            Behavior on color {
-                                ColorAnimation { duration: 150 }
-                            }
+                            color: navButton.checked ? "#ffffff" : "transparent"
                         }
                     }
 
                     checkable: true
                     autoExclusive: true
-                    checked: index === 0
+                    checked: {
+                        switch(modelData.toLowerCase()) {
+                            case "downloader":
+                                return mainWindow.currentPage === "downloadsPage"
+                            case "converter":
+                                return mainWindow.currentPage === "converterPage"
+                            case "stem extractor":
+                                return mainWindow.currentPage === "stemExtractorPage"
+                            default:
+                                return false
+                        }
+                    }
+
+                    onClicked: mainWindow.switchPage(modelData)
                 }
             }
         }
@@ -156,10 +165,6 @@ Rectangle {
 
                 background: Rectangle {
                     color: parent.hovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent"
-
-                    Behavior on color {
-                        ColorAnimation { duration: 100 }
-                    }
                 }
 
                 onClicked: windowController.minimizeWindow()
@@ -183,10 +188,6 @@ Rectangle {
 
                 background: Rectangle {
                     color: parent.hovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent"
-
-                    Behavior on color {
-                        ColorAnimation { duration: 100 }
-                    }
                 }
 
                 onClicked: windowController.maximizeWindow()
@@ -209,10 +210,6 @@ Rectangle {
 
                 background: Rectangle {
                     color: parent.hovered ? "#c42b1c" : "transparent"
-
-                    Behavior on color {
-                        ColorAnimation { duration: 100 }
-                    }
                 }
 
                 onClicked: windowController.closeWindow()
