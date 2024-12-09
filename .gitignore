@@ -1,2 +1,4 @@
 build
 mdu.pro.user
+mdu_linux.pro.user
+build_linux

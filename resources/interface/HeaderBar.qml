@@ -87,6 +87,12 @@ Rectangle {
                 font.pixelSize: 12
                 Layout.leftMargin: 8
             }
+            Label {
+                text: "alpha-1"
+                color: "#a1a1a1"
+                font.pixelSize: 12
+                Layout.leftMargin: 8
+            }
         }
 
         // Center Section - Navigation

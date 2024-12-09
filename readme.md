@@ -42,6 +42,7 @@ A modern, feature-rich media downloader and processor built with Qt6, featuring 
 - [FFmpeg](https://ffmpeg.org/) - Multimedia processing framework
 - [framelesshelper](https://github.com/bmzp/framelesshelper-1) - Modern frameless window implementation
 - [spleeterpp](https://github.com/gvne/spleeterpp) - C++ port of Spleeter for stem extraction
+- [FluentUI Icon Font](https://github.com/microsoft/fluentui-system-icons) icon fonts for windows
 
 ## Building
 
@@ -208,7 +209,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Your Name - [Himesora Aika.](https://bsky.app/profile/himeaika.bsky.social)
+[Himesora Aika.](https://bsky.app/profile/himeaika.bsky.social)
 
 Project Link: [mdu](https://github.com/project-mdu)
 

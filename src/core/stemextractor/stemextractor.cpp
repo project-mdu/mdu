@@ -1,3 +1,1 @@
-#include "stemextractor.hpp"
-
-StemExtractor::StemExtractor() {}
+//qweqweqe

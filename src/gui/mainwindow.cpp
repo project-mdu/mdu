@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_engine(m_quickView->engine())
     , m_windowController(new WindowController(this))
     , m_downloadManager(new DownloadManager(this))  // Initialize DownloadManager
+    , m_deviceManager(new DeviceManager(this))  // Initialize DeviceManager
 {
     setupWindow();
     setupQml();
@@ -39,6 +40,7 @@ void MainWindow::setupWindow()
     m_quickWidget->setMinimumSize(800, 600);  // Minimum size for the QML view
     m_quickWidget->setFocusPolicy(Qt::StrongFocus);  // Enable keyboard focus
 
+
     // Set up the layout for the main window
     auto layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -52,6 +54,7 @@ void MainWindow::setupQml()
     // Expose C++ objects to QML
     m_quickView->rootContext()->setContextProperty("windowController", m_windowController);
     m_quickView->rootContext()->setContextProperty("downloadManager", m_downloadManager);
+    m_quickView->rootContext()->setContextProperty("deviceManager", m_deviceManager);  // Add this line
 
     // Add import paths for QML
     m_engine->addImportPath("qrc:/interface");

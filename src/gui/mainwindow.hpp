@@ -5,6 +5,7 @@
 #include <QQmlEngine>
 #include "windowcontroller.hpp"
 #include "core/downloadmanager.hpp"
+#include "utils/devicesmanager.hpp"  // Add this include
 
 class MainWindow : public QWidget
 {
@@ -29,5 +30,6 @@ private:
     QQmlEngine *m_engine;           // QML engine for managing QML components
     WindowController *m_windowController;  // Controller for window state and interaction
     DownloadManager *m_downloadManager;    // Manager for handling downloads
+    DeviceManager *m_deviceManager;  // Add this member
     QWidget *m_quickWidget;         // Embeds QQuickView in the main window
 };

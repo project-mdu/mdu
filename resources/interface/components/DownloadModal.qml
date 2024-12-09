@@ -128,6 +128,8 @@ Dialog {
                            label: Label {
                                text: parent.title
                                color: "#ffffff"
+                               x:16
+                               y:8
                                font.pixelSize: 13
                                font.bold: true
                            }
@@ -145,12 +147,14 @@ Dialog {
                                        text: "Video Resolution"
                                        color: "#ffffff"
                                        font.pixelSize: 13
+                                       x:16
                                    }
 
                                    ComboBox {
                                        id: resolutionCombo
                                        Layout.fillWidth: true
                                        model: ["Auto", "4K", "1440p", "1080p", "720p", "480p", "360p"]
+                                       leftPadding: 8
 
                                        background: Rectangle {
                                            color: "#1e1e1e"
@@ -176,6 +180,7 @@ Dialog {
                                        text: "Framerate"
                                        checked: false
                                        spacing: 8
+                                       leftPadding: 24
 
                                        contentItem: Text {
                                            text: parent.text
@@ -212,6 +217,7 @@ Dialog {
                                        enabled: framerateCheck.checked
                                        model: ["60fps", "30fps"]
                                        opacity: enabled ? 1.0 : 0.5
+                                       leftPadding: 8
 
                                        background: Rectangle {
                                            color: "#1e1e1e"
@@ -246,6 +252,8 @@ Dialog {
                            label: Label {
                                text: parent.title
                                color: "#ffffff"
+                               x:16
+                               y:8
                                font.pixelSize: 13
                                font.bold: true
                            }
@@ -263,6 +271,7 @@ Dialog {
                                        text: "Audio Only"
                                        checked: false
                                        spacing: 8
+                                       leftPadding: 24
 
                                        contentItem: Text {
                                            text: parent.text
@@ -299,6 +308,7 @@ Dialog {
                                        enabled: audioOnlyCheck.checked
                                        model: ["MP3", "AAC", "WAV", "OPUS"]
                                        opacity: enabled ? 1.0 : 0.5
+                                       leftPadding: 8
 
                                        background: Rectangle {
                                            color: "#1e1e1e"
@@ -333,6 +343,8 @@ Dialog {
                                            text: parent.title
                                            color: "#ffffff"
                                            font.pixelSize: 13
+                                           x:16
+                                           y:8
                                            font.bold: true
                                        }
 
@@ -349,6 +361,7 @@ Dialog {
                                                    text: "Download with thumbnails"
                                                    checked: false
                                                    spacing: 8
+                                                   leftPadding: 24
 
                                                    contentItem: Text {
                                                        text: parent.text
@@ -384,6 +397,7 @@ Dialog {
                                                    text: "Download as playlist"
                                                    checked: false
                                                    spacing: 8
+                                                   leftPadding: 24
 
                                                    contentItem: Text {
                                                        text: parent.text
@@ -425,6 +439,7 @@ Dialog {
                                                    text: "Enable encoding"
                                                    checked: false
                                                    spacing: 8
+                                                   leftPadding: 24
 
                                                    contentItem: Text {
                                                        text: parent.text
@@ -461,6 +476,7 @@ Dialog {
                                                    enabled: encodingCheck.checked
                                                    opacity: encodingCheck.checked ? 1.0 : 0.5
 
+
                                                    RowLayout {
                                                        Layout.fillWidth: true
                                                        spacing: 8
@@ -476,6 +492,7 @@ Dialog {
                                                            id: codecCombo
                                                            Layout.fillWidth: true
                                                            model: ["H.264", "H.265", "VP9"]
+                                                           leftPadding: 8
 
                                                            background: Rectangle {
                                                                color: "#1e1e1e"
@@ -506,6 +523,7 @@ Dialog {
                                                            id: bitrateCombo
                                                            Layout.fillWidth: true
                                                            model: ["Auto", "1000k", "2000k", "4000k", "8000k"]
+                                                           leftPadding:8
 
                                                            background: Rectangle {
                                                                color: "#1e1e1e"

@@ -37,7 +37,7 @@ Page {
                     Rectangle {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 40
-                        color: "#121212"
+                        color: "#2d2d2d"
 
                         RowLayout {
                             anchors.fill: parent
@@ -125,13 +125,18 @@ Page {
                                         color: "#ffffff"
                                         elide: Text.ElideMiddle
                                         font.pixelSize: 12
+                                        maximumLineCount: 1
+                                        wrapMode: Text.NoWrap
                                     }
 
                                     Text {
+                                        Layout.fillWidth: true
                                         text: filePath || ""
                                         color: "#808080"
                                         font.pixelSize: 10
-                                        elide: Text.ElideMiddle
+                                        elide: Text.ElideRight
+                                        maximumLineCount: 1
+                                        wrapMode: Text.NoWrap
                                     }
                                 }
 
@@ -161,31 +166,70 @@ Page {
                         }
 
                         // Empty state
-                        Rectangle {
-                            anchors.fill: parent
-                            color: "transparent"
-                            visible: filesModel.count === 0
+                        // Empty state with Drag and Drop support
+                                                Rectangle {
+                                                    id: emptyStateDropArea
+                                                    anchors.fill: parent
+                                                    color: dropArea.containsDrag ? "#2c2c2c" : "transparent"
+                                                    visible: filesModel.count === 0
 
-                            ColumnLayout {
-                                anchors.centerIn: parent
-                                spacing: 8
+                                                    ColumnLayout {
+                                                        anchors.centerIn: parent
+                                                        spacing: 8
 
-                                Text {
-                                    text: "\uE8A5"
-                                    font.family: "Segoe Fluent Icons"
-                                    font.pixelSize: 24
-                                    color: "#404040"
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
+                                                        Text {
+                                                            text: "\uE8A5"
+                                                            font.family: "Segoe Fluent Icons"
+                                                            font.pixelSize: 24
+                                                            color: dropArea.containsDrag ? "#0078D4" : "#404040"
+                                                            Layout.alignment: Qt.AlignHCenter
+                                                        }
 
-                                Text {
-                                    text: "Drop audio files here"
-                                    color: "#404040"
-                                    font.pixelSize: 12
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
-                            }
-                        }
+                                                        Text {
+                                                            text: dropArea.containsDrag ? "Drop files to add" : "Drop audio files here"
+                                                            color: dropArea.containsDrag ? "#0078D4" : "#404040"
+                                                            font.pixelSize: 12
+                                                            Layout.alignment: Qt.AlignHCenter
+                                                        }
+                                                    }
+
+                                                    // Drag and Drop Area
+                                                    DropArea {
+                                                        id: dropArea
+                                                        anchors.fill: parent
+                                                        keys: ["text/uri-list"]
+
+                                                        onDropped: (drop) => {
+                                                            // Process dropped files
+                                                            if (drop.hasUrls) {
+                                                                for (let i = 0; i < drop.urls.length; i++) {
+                                                                    let filePath = drop.urls[i].toString()
+                                                                    filePath = filePath.replace(/^(file:\/{3})/, "")
+
+                                                                    // Check file extension
+                                                                    const validExtensions = ['.mp3', '.wav', '.flac', '.m4a']
+                                                                    const fileExt = filePath.substring(filePath.lastIndexOf('.')).toLowerCase()
+
+                                                                    if (validExtensions.includes(fileExt)) {
+                                                                        let fileName = filePath.split('/').pop()
+
+                                                                        filesModel.append({
+                                                                            fileName: fileName,
+                                                                            filePath: filePath
+                                                                        })
+                                                                    }
+                                                                }
+                                                                drop.acceptProposedAction()
+                                                            }
+                                                        }
+
+                                                        onEntered: (drag) => {
+                                                            // Optional: you could add additional validation here
+                                                            drag.accepted = true
+                                                        }
+                                                    }
+                                                }
+
                     }
 
                     // Extraction Controls
@@ -234,6 +278,7 @@ Page {
                                             height: 18
                                             radius: 4
                                             color: "transparent"
+                                            y: 6
                                             border.color: parent.checked ? "#0078D4" : "#404040"
                                             border.width: 1
 
@@ -292,13 +337,13 @@ Page {
                     Rectangle {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 40
-                        color: "#121212"
+                        color: "#2d2d2d"
 
                         RowLayout {
                             anchors.fill: parent
                             anchors.leftMargin: 12
                             anchors.rightMargin: 12
-                            spacing: 384
+                            spacing: 600
 
                             Text {
                                 text: "Progress"
@@ -313,14 +358,82 @@ Page {
                                     font.pixelSize: 12
                                     font.weight: Font.Medium
                                 }
-
                                 ComboBox {
                                     id: deviceSelector
                                     Layout.fillWidth: true
                                     Layout.preferredHeight: 32
-                                    model: ["CPU", "GPU"]
-                                    currentIndex: 0
+                                    indicator: Item {} // Empty item effectively removes the arrow
 
+                                    // Enhanced model handling
+                                    model: {
+                                        // Ensure devices are available, otherwise provide a fallback
+                                        deviceManager.availableDevices.length > 0
+                                            ? deviceManager.availableDevices
+                                            : ["CPU"]
+                                    }
+
+                                    // Improved current index selection with fallback
+                                    currentIndex: {
+                                        const currentDevice = deviceManager.currentDevice
+                                        const index = model.indexOf(currentDevice)
+                                        return index !== -1 ? index : 0
+                                    }
+
+                                    // More robust device selection
+                                    onCurrentValueChanged: {
+                                        // Validate before changing
+                                        if (currentValue && deviceManager.availableDevices.includes(currentValue)) {
+                                            deviceManager.currentDevice = currentValue
+
+                                            // Optional: Log device change or show a temporary notification
+                                            console.log("Device changed to: " + currentValue)
+                                        }
+                                    }
+
+                                    // Add a tooltip to show current device details
+                                    ToolTip {
+                                        id: deviceTooltip
+                                        text: {
+                                            // Try to get GPU details if GPU is selected
+                                            if (deviceSelector.currentValue === "GPU") {
+                                                const details = deviceManager.getDeviceDetails(1) // GPU is typically index 1
+                                                return details
+                                                    ? `GPU: ${details.name}\nMemory: ${(details.memorySize / (1024 * 1024)).toFixed(0)} MB`
+                                                    : "GPU details unavailable"
+                                            }
+                                            return ""
+                                        }
+                                        visible: deviceSelector.hovered && text !== ""
+                                    }
+
+                                    // Visual indicator for device type
+                                    Rectangle {
+                                        anchors.right: parent.right
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.rightMargin: 8
+                                        width: 10
+                                        height: 10
+                                        radius: 5
+                                        color: {
+                                            switch(deviceSelector.currentValue) {
+                                            case "GPU": return "#4CAF50"  // Green for GPU
+                                            case "NPU": return "#2196F3"  // Blue for NPU
+                                            default: return "#FF9800"     // Orange for CPU
+                                            }
+                                        }
+                                    }
+
+                                    // Error handling placeholder
+                                    Text {
+                                        anchors.centerIn: parent
+                                        text: deviceManager.availableDevices.length === 0
+                                              ? "No devices detected"
+                                              : ""
+                                        color: "red"
+                                        visible: text !== ""
+                                    }
+
+                                    // Existing styling remains the same...
                                     background: Rectangle {
                                         color: parent.down ? "#2c2c2c" : "#242424"
                                         border.color: "#404040"
@@ -339,14 +452,12 @@ Page {
                                     delegate: ItemDelegate {
                                         width: deviceSelector.width
                                         height: 32
-
                                         contentItem: Text {
                                             text: modelData
                                             color: "#ffffff"
                                             font.pixelSize: 12
                                             verticalAlignment: Text.AlignVCenter
                                         }
-
                                         background: Rectangle {
                                             color: parent.hovered ? "#2c2c2c" : "#242424"
                                         }
@@ -356,14 +467,12 @@ Page {
                                         y: deviceSelector.height
                                         width: deviceSelector.width
                                         padding: 1
-
                                         background: Rectangle {
                                             color: "#242424"
                                             border.color: "#404040"
                                             border.width: 1
                                             radius: 4
                                         }
-
                                         contentItem: ListView {
                                             clip: true
                                             implicitHeight: contentHeight
@@ -484,6 +593,19 @@ Page {
                     filePath: filePath
                 })
             }
+        }
+    }
+    Connections {
+        target: deviceManager
+
+        // Handle available devices changing
+        function onAvailableDevicesChanged() {
+            deviceSelector.model = deviceManager.availableDevices
+        }
+
+        // Optional: Handle current device changing
+        function onCurrentDeviceChanged() {
+            deviceSelector.currentIndex = deviceSelector.model.indexOf(deviceManager.currentDevice)
         }
     }
 }
