@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EncodingDialog</class>
+ <widget class="QDialog" name="EncodingDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Advanced Encoding Options</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <!-- Video Tab -->
+     <widget class="QWidget" name="videoTab">
+      <attribute name="title">
+       <string>Video</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="videoOptionsGroup">
+         <property name="title">
+          <string>Video Options</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="codecLabel">
+            <property name="text">
+             <string>Codec:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="videoCodecCombo">
+            <item>
+             <property name="text">
+              <string>H.264/AVC</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>H.265/HEVC</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>VP9</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>AV1</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="presetLabel">
+            <property name="text">
+             <string>Preset:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="presetCombo">
+            <item>
+             <property name="text">
+              <string>ultrafast</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>superfast</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>veryfast</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>faster</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>fast</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>medium</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>slow</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>slower</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>veryslow</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="qualityLabel">
+            <property name="text">
+             <string>Quality (CRF):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <layout class="QHBoxLayout" name="qualityLayout">
+            <item>
+             <widget class="QSlider" name="qualitySlider">
+              <property name="minimum">
+               <number>0</number>
+              </property>
+              <property name="maximum">
+               <number>51</number>
+              </property>
+              <property name="value">
+               <number>23</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="qualitySpinBox">
+              <property name="minimum">
+               <number>0</number>
+              </property>
+              <property name="maximum">
+               <number>51</number>
+              </property>
+              <property name="value">
+               <number>23</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="resolutionLabel">
+            <property name="text">
+             <string>Resolution:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <layout class="QHBoxLayout" name="resolutionLayout">
+            <item>
+             <widget class="QComboBox" name="resolutionCombo">
+              <item>
+               <property name="text">
+                <string>Original</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>3840x2160 (4K)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2560x1440 (2K)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1920x1080 (FHD)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1280x720 (HD)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Custom</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="widthSpinBox">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="maximum">
+               <number>7680</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="resolutionSeparator">
+              <property name="text">
+               <string>x</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="heightSpinBox">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="maximum">
+               <number>4320</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="fpsLabel">
+            <property name="text">
+             <string>Frame Rate:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QComboBox" name="fpsCombo">
+            <item>
+             <property name="text">
+              <string>Original</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>60</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>50</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>30</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>25</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>24</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <!-- Audio Tab -->
+     <widget class="QWidget" name="audioTab">
+      <attribute name="title">
+       <string>Audio</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="audioOptionsGroup">
+         <property name="title">
+          <string>Audio Options</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="audioCodecLabel">
+            <property name="text">
+             <string>Codec:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="audioCodecCombo">
+            <item>
+             <property name="text">
+              <string>AAC</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Opus</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>MP3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>FLAC</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="bitrateLabel">
+            <property name="text">
+             <string>Bitrate (kbps):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="bitarteCombo">
+            <item>
+             <property name="text">
+              <string>320</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>256</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>192</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>128</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>96</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="sampleRateLabel">
+            <property name="text">
+             <string>Sample Rate:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QComboBox" name="sampleRateCombo">
+            <item>
+             <property name="text">
+              <string>Original</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>48000 Hz</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>44100 Hz</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>32000 Hz</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="channelsLabel">
+            <property name="text">
+             <string>Channels:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QComboBox" name="channelsCombo">
+            <item>
+             <property name="text">
+              <string>Original</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Stereo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Mono</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="buttonLayout">
+     <item>
+      <widget class="QPushButton" name="resetButton">
+       <property name="text">
+        <string>Reset to Defaults</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="okButton">
+       <property name="text">
+        <string>OK</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

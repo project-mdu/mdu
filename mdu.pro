@@ -73,28 +73,38 @@ QMAKE_CXXFLAGS += \
 
 # Source files
 SOURCES += \
+    src/core/ffmpeghelper.cpp \
     src/core/stemextractor/stemextractor.cpp \
+    src/core/stemextractor/uvrhelper.cpp \
     src/core/ytdlphelper.cpp \
     src/gui/aboutqt.cpp \
+    src/gui/encoderoption.cpp \
     src/gui/windowcontroller.cpp \
     src/main.cpp \
     src/gui/mainwindow.cpp \
     src/gui/framelesshelper.cpp \
     src/gui/winnativeeventfilter.cpp \
     src/core/downloadmanager.cpp \
-    src/utils/devicesmanager.cpp
+    src/utils/devicesmanager.cpp \
+    src/utils/downloadbinary.cpp \
+    src/utils/updateytdlp.cpp
 
 # Header files
 HEADERS += \
     src/core/downloadmanager.hpp \
+    src/core/ffmpeghelper.hpp \
     src/core/stemextractor/stemextractor.hpp \
+    src/core/stemextractor/uvrhelper.hpp \
     src/core/ytdlphelper.hpp \
     src/gui/aboutqt.hpp \
+    src/gui/encoderoption.h \
     src/gui/mainwindow.hpp \
     src/gui/framelesshelper.hpp \
     src/gui/windowcontroller.hpp \
     src/gui/winnativeeventfilter.hpp \
-    src/utils/devicesmanager.hpp
+    src/utils/devicesmanager.hpp \
+    src/utils/downloadbinary.hpp \
+    src/utils/updateytdlp.hpp
 
 # Resources
 RESOURCES += resources/shared.qrc
@@ -219,3 +229,6 @@ DISTFILES += \
     .gitignore \
     README.md \
     LICENSE
+
+FORMS += \
+    src/gui/encoderoption.ui

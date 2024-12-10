@@ -44,5 +44,7 @@
         <file>interface/components/SettingsPopup.qml</file>
         <file>interface/components/FileItem.qml</file>
         <file>interface/components/ExtractorControls.qml</file>
+        <file>fonts/iconfont/FluentSystemIcons-Regular.ttf</file>
+        <file>interface/components/About.qml</file>
     </qresource>
 </RCC>

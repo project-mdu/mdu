@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_windowController(new WindowController(this))
     , m_downloadManager(new DownloadManager(this))  // Initialize DownloadManager
     , m_deviceManager(new DeviceManager(this))  // Initialize DeviceManager
+    , m_uvrHelper(new UVRHelper(this))  // Initialize UVRHelper
 {
     setupWindow();
     setupQml();
@@ -55,6 +56,7 @@ void MainWindow::setupQml()
     m_quickView->rootContext()->setContextProperty("windowController", m_windowController);
     m_quickView->rootContext()->setContextProperty("downloadManager", m_downloadManager);
     m_quickView->rootContext()->setContextProperty("deviceManager", m_deviceManager);  // Add this line
+    m_quickView->rootContext()->setContextProperty("uvrHelper", m_uvrHelper);  // Add this line
 
     // Add import paths for QML
     m_engine->addImportPath("qrc:/interface");

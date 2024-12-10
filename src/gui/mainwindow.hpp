@@ -6,6 +6,7 @@
 #include "windowcontroller.hpp"
 #include "core/downloadmanager.hpp"
 #include "utils/devicesmanager.hpp"  // Add this include
+#include "core/stemextractor/uvrhelper.hpp"  // Add this include
 
 class MainWindow : public QWidget
 {
@@ -31,5 +32,6 @@ private:
     WindowController *m_windowController;  // Controller for window state and interaction
     DownloadManager *m_downloadManager;    // Manager for handling downloads
     DeviceManager *m_deviceManager;  // Add this member
+    UVRHelper *m_uvrHelper;  // Add this member
     QWidget *m_quickWidget;         // Embeds QQuickView in the main window
 };

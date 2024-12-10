@@ -4,6 +4,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects  // For Qt6 shadow effects
 
+
 Rectangle {
     id: mainMenu
     anchors.fill: parent
@@ -79,7 +80,20 @@ Rectangle {
                     { text: "Documentation", shortcut: "F1", onClicked: windowController.documentationRequested },
                     { text: "Check for Updates", onClicked: windowController.checkUpdateRequested },
                     { separator: true },
-                    { text: "About", onClicked: windowController.aboutRequested },
+                    { text: "About", onClicked: () => {
+                        if (!aboutDialog) {
+                            let component = Qt.createComponent("About.qml");
+                            if (component.status === Component.Ready) {
+                                aboutDialog = component.createObject(mainWindow, {
+                                    parent: mainWindow
+                                });
+                            }
+                        }
+                        if (aboutDialog) {
+                            aboutDialog.open();
+                        }
+                        mainMenu.close();
+                    }},
                     { text: "About Qt", onClicked: windowController.aboutQtRequested }
                 ]
             }
