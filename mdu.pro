@@ -78,7 +78,12 @@ SOURCES += \
     src/core/stemextractor/uvrhelper.cpp \
     src/core/ytdlphelper.cpp \
     src/gui/aboutqt.cpp \
+    src/gui/clearconfirmdialog.cpp \
+    src/gui/confirmdialog.cpp \
+    src/gui/customdialog.cpp \
+    src/gui/dialogmanager.cpp \
     src/gui/encoderoption.cpp \
+    src/gui/errordialog.cpp \
     src/gui/windowcontroller.cpp \
     src/main.cpp \
     src/gui/mainwindow.cpp \
@@ -97,7 +102,12 @@ HEADERS += \
     src/core/stemextractor/uvrhelper.hpp \
     src/core/ytdlphelper.hpp \
     src/gui/aboutqt.hpp \
+    src/gui/clearconfirmdialog.hpp \
+    src/gui/confirmdialog.hpp \
+    src/gui/customdialog.hpp \
+    src/gui/dialogmanager.hpp \
     src/gui/encoderoption.h \
+    src/gui/errordialog.hpp \
     src/gui/mainwindow.hpp \
     src/gui/framelesshelper.hpp \
     src/gui/windowcontroller.hpp \

@@ -7,6 +7,9 @@ DownloadManager::DownloadManager(QObject *parent)
     QString appDataPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
     m_historyFilePath = appDataPath + "/history.json";
 
+    // Ensure app data directory exists
+    ensureDirectoryExists(appDataPath);
+
     m_futureWatcher = new QFutureWatcher<QJsonArray>(this);
     connect(m_futureWatcher, &QFutureWatcher<QJsonArray>::finished, this, [this]() {
         emit downloadHistoryLoaded(m_futureWatcher->result());
@@ -50,4 +53,31 @@ QJsonArray DownloadManager::loadDownloadHistoryInternal()
 QString DownloadManager::getAppDataPath() const
 {
     return QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+}
+
+QString DownloadManager::getDefaultDownloadsPath() const
+{
+    // Get the system's Downloads folder path
+    QString downloadPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+
+    // Create a subdirectory for our app (optional)
+    downloadPath += "/MediaDownloader";
+
+    // Ensure the directory exists
+    ensureDirectoryExists(downloadPath);
+
+    // Return the path with native separators
+    return QDir::toNativeSeparators(downloadPath);
+}
+
+bool DownloadManager::ensureDirectoryExists(const QString& path) const
+{
+    QDir dir(path);
+    if (!dir.exists()) {
+        if (!dir.mkpath(".")) {
+            qWarning() << "Failed to create directory:" << path;
+            return false;
+        }
+    }
+    return true;
 }

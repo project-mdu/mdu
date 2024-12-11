@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QDateTime>
+#include <QStandardPaths>
 
 YtDlpHelper::YtDlpHelper(QObject *parent)
     : QObject(parent)
@@ -28,8 +29,13 @@ YtDlpHelper::~YtDlpHelper()
 
 void YtDlpHelper::initYtDlpPath()
 {
-    QString appDir = QCoreApplication::applicationDirPath();
-    m_ytDlpPath = QDir(appDir).filePath("bin/yt-dlp.exe");
+    QString baseDir = QCoreApplication::applicationDirPath();
+
+#ifdef Q_OS_WIN
+    m_ytDlpPath = QDir::toNativeSeparators(baseDir + "/bin/yt-dlp.exe");
+#else
+    m_ytDlpPath = QDir::toNativeSeparators(baseDir + "/bin/yt-dlp");
+#endif
 
     QFileInfo ytDlpFile(m_ytDlpPath);
     m_ytDlpAvailable = ytDlpFile.exists() && ytDlpFile.isExecutable();
@@ -38,7 +44,6 @@ void YtDlpHelper::initYtDlpPath()
         qWarning() << "yt-dlp not found at:" << m_ytDlpPath;
     } else {
         qDebug() << "yt-dlp found at:" << m_ytDlpPath;
-        // Verify version
         verifyYtDlpVersion();
     }
 }
@@ -56,6 +61,40 @@ void YtDlpHelper::verifyYtDlpVersion()
     }
 }
 
+QString YtDlpHelper::sanitizePath(const QString& path) const
+{
+    QString sanitized = QDir::toNativeSeparators(path);
+#ifdef Q_OS_WIN
+    if (sanitized.contains(" ")) {
+        sanitized = QString("\"%1\"").arg(sanitized);
+    }
+#endif
+    return sanitized;
+}
+
+QString YtDlpHelper::ensureDirectoryExists(const QString& path) const
+{
+    QDir dir(path);
+    if (!dir.exists()) {
+        if (!dir.mkpath(".")) {
+            qWarning() << "Failed to create directory:" << path;
+            return QString();
+        }
+    }
+    return QDir::toNativeSeparators(dir.absolutePath());
+}
+
+QString YtDlpHelper::formatOutputTemplate(const QString& basePath, bool isAudioOnly) const
+{
+    QString templateStr;
+    if (isAudioOnly) {
+        templateStr = basePath + "/%(title)s.%(ext)s";
+    } else {
+        templateStr = basePath + "/%(title)s_%(resolution)s.%(ext)s";
+    }
+    return sanitizePath(templateStr);
+}
+
 void YtDlpHelper::startDownload(const QString& url, const QString& outputPath, const QStringList& options)
 {
     if (!m_ytDlpAvailable) {
@@ -68,28 +107,30 @@ void YtDlpHelper::startDownload(const QString& url, const QString& outputPath, c
         return;
     }
 
-    // Validate URL
     if (url.isEmpty() || !url.startsWith("http")) {
         handleError("Invalid URL provided");
         return;
     }
 
-    // Prepare output directory
-    QFileInfo outputInfo(outputPath);
-    QDir outputDir = outputInfo.dir();
-    if (!outputDir.exists()) {
-        if (!outputDir.mkpath(".")) {
-            handleError("Failed to create output directory: " + outputDir.path());
-            return;
-        }
+    QString outputDir = ensureDirectoryExists(QFileInfo(outputPath).path());
+    if (outputDir.isEmpty()) {
+        handleError("Failed to create output directory");
+        return;
     }
+
+    bool isAudioOnly = options.contains("-x");
 
     QStringList args;
     args << "--progress" << "--newline";
-    // Add default options for better output parsing
     args << "--print-json" << "--no-warnings";
+
+    if (!isAudioOnly) {
+        args << "--format-sort" << "res,ext:mp4:m4a";
+    }
+
     args.append(options);
-    args << "-o" << outputPath;
+    QString outputTemplate = formatOutputTemplate(outputDir, isAudioOnly);
+    args << "-o" << outputTemplate;
     args << url;
 
     m_currentProgress = DownloadProgress();
@@ -98,7 +139,7 @@ void YtDlpHelper::startDownload(const QString& url, const QString& outputPath, c
     emit progressUpdated(m_currentProgress);
 
     qDebug() << "Starting download with command:" << m_ytDlpPath << args.join(" ");
-    m_process->setWorkingDirectory(outputDir.path());
+    m_process->setWorkingDirectory(outputDir);
     m_process->start(m_ytDlpPath, args);
 }
 
@@ -122,7 +163,6 @@ void YtDlpHelper::handleProcessOutput()
 
 void YtDlpHelper::parseOutput(const QString& output)
 {
-    // Check for filename
     QRegularExpressionMatch filenameMatch = RE_FILENAME.match(output);
     if (filenameMatch.hasMatch()) {
         m_currentProgress.filename = QFileInfo(filenameMatch.captured(1)).fileName();
@@ -131,14 +171,12 @@ void YtDlpHelper::parseOutput(const QString& output)
         return;
     }
 
-    // Check for progress
     QRegularExpressionMatch progressMatch = RE_PROGRESS.match(output);
     if (progressMatch.hasMatch()) {
         updateProgress(progressMatch);
         return;
     }
 
-    // Check for processing status
     QRegularExpressionMatch processingMatch = RE_PROCESSING.match(output);
     if (processingMatch.hasMatch()) {
         m_currentProgress.state = DownloadState::Processing;
@@ -147,14 +185,19 @@ void YtDlpHelper::parseOutput(const QString& output)
         return;
     }
 
-    // Check for errors
+    if (output.contains("ERROR:", Qt::CaseInsensitive)) {
+        int errorIndex = output.indexOf("ERROR:", Qt::CaseInsensitive);
+        QString errorMsg = output.mid(errorIndex + 6).trimmed();
+        handleError(errorMsg);
+        return;
+    }
+
     QRegularExpressionMatch errorMatch = RE_ERROR.match(output);
     if (errorMatch.hasMatch()) {
         handleError(errorMatch.captured(1));
         return;
     }
 
-    // Log unhandled output for debugging
     qDebug() << "Unhandled yt-dlp output:" << output;
 }
 
@@ -165,11 +208,9 @@ void YtDlpHelper::updateProgress(const QRegularExpressionMatch& match)
     m_currentProgress.speed = QString("%1%2iB/s").arg(match.captured(4)).arg(match.captured(5));
     m_currentProgress.eta = match.captured(6);
 
-    // Calculate elapsed time
     qint64 elapsed = m_currentProgress.startTime.secsTo(QDateTime::currentDateTime());
     m_currentProgress.elapsedTime = formatDuration(elapsed);
 
-    // Update status
     m_currentProgress.status = QString("Downloading - %1% at %2 (ETA: %3)")
                                    .arg(m_currentProgress.percentage, 0, 'f', 1)
                                    .arg(m_currentProgress.speed)

@@ -59,33 +59,31 @@ bool FFmpegHelper::initialize() {
 }
 
 bool FFmpegHelper::findFFmpegPath() {
-    QStringList possiblePaths = {
-        QDir::currentPath(),
-        QCoreApplication::applicationDirPath(),
-        QDir::currentPath() + "/ffmpeg",
-        QCoreApplication::applicationDirPath() + "/ffmpeg"
-    };
+    // Get base application directory
+    QString baseDir = QCoreApplication::applicationDirPath();
 
 #ifdef Q_OS_WIN
-    QString ffmpegExe = "ffmpeg.exe";
-    QString ffprobeExe = "ffprobe.exe";
+    // Set paths to FFmpeg executables in the bin directory
+    m_ffmpegPath = QDir::toNativeSeparators(baseDir + "/bin/ffmpeg.exe");
+    m_ffprobePath = QDir::toNativeSeparators(baseDir + "/bin/ffprobe.exe");
 #else
-    QString ffmpegExe = "ffmpeg";
-    QString ffprobeExe = "ffprobe";
+    // Set paths for Unix-like systems
+    m_ffmpegPath = QDir::toNativeSeparators(baseDir + "/bin/ffmpeg");
+    m_ffprobePath = QDir::toNativeSeparators(baseDir + "/bin/ffprobe");
 #endif
 
-    for (const QString& basePath : possiblePaths) {
-        QFileInfo ffmpegInfo(basePath + "/" + ffmpegExe);
-        QFileInfo ffprobeInfo(basePath + "/" + ffprobeExe);
+    // Check if both executables exist and are executable
+    QFileInfo ffmpegInfo(m_ffmpegPath);
+    QFileInfo ffprobeInfo(m_ffprobePath);
 
-        if (ffmpegInfo.exists() && ffmpegInfo.isExecutable() &&
-            ffprobeInfo.exists() && ffprobeInfo.isExecutable()) {
-            m_ffmpegPath = ffmpegInfo.absoluteFilePath();
-            m_ffprobePath = ffprobeInfo.absoluteFilePath();
-            return true;
-        }
+    if (ffmpegInfo.exists() && ffmpegInfo.isExecutable() &&
+        ffprobeInfo.exists() && ffprobeInfo.isExecutable()) {
+        qDebug() << "FFmpeg found at:" << m_ffmpegPath;
+        qDebug() << "FFprobe found at:" << m_ffprobePath;
+        return true;
     }
 
+    qWarning() << "FFmpeg executables not found at:" << m_ffmpegPath;
     emit logMessage("FFmpeg executables not found");
     return false;
 }

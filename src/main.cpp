@@ -3,6 +3,7 @@
 #include "gui/framelesshelper.hpp"
 #include "mainwindow.hpp"
 #include "core/stemextractor/stemextractor.hpp"
+#include "core/ytdlphelper.hpp"
 // #include "utils/devicesmanager.hpp"
 
 int main(int argc, char *argv[]) {
@@ -14,6 +15,7 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     app.setOrganizationName("Khaoniewji");
     app.setApplicationName("Media Downloader Utility");
+    qmlRegisterType<YtDlpHelper>("net.mdu.core", 1, 0, "YtDlpHelper");
 
     FramelessHelper helper;
 

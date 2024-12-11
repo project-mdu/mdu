@@ -13,6 +13,9 @@ Dialog {
     width: 600
     height: 700
 
+    signal accepted(var downloadConfig)  // Modify the signal to include the config
+    signal rejected()
+
     enter: Transition {
         NumberAnimation {
             property: "opacity"
@@ -51,13 +54,13 @@ Dialog {
         border.color: "#333333"
         border.width: 1
 
-        layer.enabled: true
-        layer.effect: DropShadow {
-            transparentBorder: true
-            radius: 8.0
-            samples: 17
-            color: "#80000000"
-        }
+        // layer.enabled: true
+        // layer.effect: DropShadow {
+        //     transparentBorder: true
+        //     radius: 8.0
+        //     samples: 17
+        //     color: "#80000000"
+        // }
     }
 
     header: Rectangle {
@@ -621,8 +624,8 @@ Dialog {
                                                        bitrate: bitrateCombo.currentText
                                                    } : null
                                                }
-                                               console.log(JSON.stringify(downloadConfig, null, 2))
-                                               root.accept()
+                                               root.accepted(downloadConfig)  // Pass the config with the signal
+                                               root.close()
                                            }
                                        }
                                    }

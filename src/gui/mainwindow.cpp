@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent)
     , m_downloadManager(new DownloadManager(this))  // Initialize DownloadManager
     , m_deviceManager(new DeviceManager(this))  // Initialize DeviceManager
     , m_uvrHelper(new UVRHelper(this))  // Initialize UVRHelper
+    , m_dialogManager(new DialogManager(this))  // Initialize DialogManager
+    , m_ytDlpHelper(new YtDlpHelper(this))  // Initialize YtDlpHelper
 {
     setupWindow();
     setupQml();
@@ -57,6 +59,8 @@ void MainWindow::setupQml()
     m_quickView->rootContext()->setContextProperty("downloadManager", m_downloadManager);
     m_quickView->rootContext()->setContextProperty("deviceManager", m_deviceManager);  // Add this line
     m_quickView->rootContext()->setContextProperty("uvrHelper", m_uvrHelper);  // Add this line
+    m_quickView->rootContext()->setContextProperty("dialogManager", m_dialogManager);  // Add this line
+    m_quickView->rootContext()->setContextProperty("ytdlpHelper", m_ytDlpHelper);  // Add this line
 
     // Add import paths for QML
     m_engine->addImportPath("qrc:/interface");
@@ -66,6 +70,8 @@ void MainWindow::setupQml()
 
     // Automatically resize QML content to fit the window
     m_quickView->setResizeMode(QQuickView::SizeRootObjectToView);
+
+
 }
 
 // Handle window resize events
@@ -90,3 +96,4 @@ void MainWindow::changeEvent(QEvent *event)
 
     QWidget::changeEvent(event);  // Pass to base class for default handling
 }
+

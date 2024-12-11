@@ -21,6 +21,8 @@ public:
 
     Q_INVOKABLE void loadDownloadHistoryAsync();
     Q_INVOKABLE QString getAppDataPath() const;
+    Q_INVOKABLE QString getDefaultDownloadsPath() const;  // Add this method
+    Q_INVOKABLE bool ensureDirectoryExists(const QString& path) const;  // Add this utility method
 
 signals:
     void downloadHistoryLoaded(const QJsonArray &data);

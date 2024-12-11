@@ -1,10 +1,10 @@
 // interface/pages/Downloads.qml
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
-import QtQuick.Controls.Basic 2.15
-import QtQuick.Window 2.15
-import Qt.labs.platform 1.1
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Basic
+import QtQuick.Window
+import Qt.labs.platform
 import "../models" as Modelx
 import "../components" as Components
 
@@ -13,17 +13,105 @@ Page {
 
     property bool isLoading: false
     property var downloadData: []
+    // property QtObject ytdlpHelper: YtDlpHelper {}
 
     Component.onCompleted: {
         loadDownloadHistory()
     }
-
     Components.DownloadModal {
         id: downloadModal
 
-        onAccepted: {
-            // Handle download configuration
-            console.log("Starting download with config")
+        onAccepted: function(config) {  // Add the config parameter here
+            // Create options list based on download config
+            let options = []
+
+            // Set video quality
+            if (!config.audioOnly) {  // Use config instead of downloadConfig
+                if (config.resolution !== "Auto") {
+                    options.push("-f")
+                    options.push(`bestvideo[height<=${config.resolution.replace("p", "")}]+bestaudio[ext=m4a]/best`)
+                }
+
+                // Add framerate option if enabled
+                if (config.framerate !== "auto") {
+                    options.push("--max-fps")
+                    options.push(config.framerate.replace("fps", ""))
+                }
+            } else {
+                // Audio only download
+                options.push("-x")
+                options.push("--audio-format")
+                options.push(config.audioFormat.toLowerCase())
+            }
+
+            // Add thumbnail option
+            if (config.withThumbnails) {
+                options.push("--write-thumbnail")
+            }
+
+            // Add playlist option
+            if (config.asPlaylist) {
+                options.push("--yes-playlist")
+            } else {
+                options.push("--no-playlist")
+            }
+
+            // Add encoding options if enabled
+            if (config.encoding) {
+                options.push("--recode-video")
+                options.push(config.encoding.codec.toLowerCase())
+                if (config.encoding.bitrate !== "Auto") {
+                    options.push("--video-quality")
+                    options.push(config.encoding.bitrate.replace("k", ""))
+                }
+            }
+
+            // Get download directory
+            let downloadDir = downloadManager.getDefaultDownloadsPath()
+            let outputTemplate = downloadDir + "/%(title)s.%(ext)s"
+
+            console.log("Download directory:", downloadDir)
+            console.log("Output template:", outputTemplate)
+
+            // Start download using YtDlpHelper
+            ytdlpHelper.startDownload(config.url, outputTemplate, options)
+            dialogManager.showConfirmation("Download Started", "Download has been added to the queue")
+        }
+    }
+    Connections {
+        target: ytdlpHelper
+
+        function onProgressUpdated(progress) {
+            // Update progress in downloads list
+            let found = false
+            for (let i = 0; i < downloadsList.model.count; i++) {
+                if (downloadsList.model.get(i).fileName === progress.filename) {
+                    downloadsList.model.setProperty(i, "progress", progress.percentage)
+                    downloadsList.model.setProperty(i, "status", progress.status)
+                    found = true
+                    break
+                }
+            }
+
+            if (!found && progress.filename) {
+                downloadsList.model.append({
+                    fileName: progress.filename,
+                    fileType: progress.state === DownloadState.Downloading ? "Downloading" : "Processing",
+                    progress: progress.percentage,
+                    status: progress.status,
+                    filePath: ""
+                })
+            }
+        }
+
+        function onDownloadFinished(success, filename) {
+            if (success) {
+                loadDownloadHistory()
+            }
+        }
+
+        function onDownloadError(error) {
+            dialogManager.showError("Download Error", error)
         }
     }
 
@@ -38,7 +126,9 @@ Page {
                 downloadsList.model.append({
                     fileName: data[i].filename,
                     fileType: data[i].file_type,
-                    filePath: data[i].path
+                    filePath: data[i].path,
+                    progress: 100,
+                    status: "Completed"
                 })
             }
 
@@ -48,8 +138,7 @@ Page {
 
         function onLoadingError(error) {
             isLoading = false
-            console.error("Error loading downloads:", error)
-            // You might want to show an error message to the user here
+            dialogManager.showError("Loading Error", "Error loading downloads: " + error)
         }
     }
 
@@ -67,10 +156,9 @@ Page {
 
         downloadData.forEach(function(item) {
             let fileType = item.file_type.toLowerCase()
-
-            if (fileType.match("video")) {
+            if (fileType.includes("video")) {
                 counts.videos++
-            } else if (fileType.match("audio")) {
+            } else if (fileType.includes("audio")) {
                 counts.audio++
             }
         })
@@ -106,7 +194,8 @@ Page {
 
                 // Add Task Button
                 Button {
-                    text: "\uE710"  // Add icon
+                    id: addButton
+                    text: "\uE710"
                     font.family: "Segoe Fluent Icons"
                     font.pixelSize: 14
                     flat: true
@@ -129,25 +218,25 @@ Page {
                     ToolTip.visible: hovered
                     ToolTip.text: "Add Task"
 
-                    onClicked: {
-                        // TODO: Implement add task functionality
-                        onClicked: downloadModal.open()
-                    }
+                    onClicked: downloadModal.open()
                 }
 
                 // Stop All Button
                 Button {
-                    text: "\uE71A"  // Stop icon
+                    id: stopButton
+                    text: "\uE71A"
                     font.family: "Segoe Fluent Icons"
                     font.pixelSize: 14
                     flat: true
                     Layout.preferredHeight: 32
                     Layout.preferredWidth: 32
+                    enabled: downloadsList.count > 0
 
                     contentItem: Text {
                         text: parent.text
                         font: parent.font
                         color: "#ffffff"
+                        opacity: parent.enabled ? 1.0 : 0.5
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -160,25 +249,25 @@ Page {
                     ToolTip.visible: hovered
                     ToolTip.text: "Stop All"
 
-                    onClicked: {
-                        // TODO: Implement stop all functionality
-                        console.log("Stop all clicked")
-                    }
+                    onClicked: ytdlpHelper.cancelDownload()
                 }
 
                 // Clear All Button
                 Button {
+                    id: clearButton
                     text: "\uE74D"
                     font.family: "Segoe Fluent Icons"
                     font.pixelSize: 14
                     flat: true
                     Layout.preferredHeight: 32
                     Layout.preferredWidth: 32
+                    enabled: downloadsList.count > 0
 
                     contentItem: Text {
                         text: parent.text
                         font: parent.font
                         color: "#ffffff"
+                        opacity: parent.enabled ? 1.0 : 0.5
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -189,11 +278,14 @@ Page {
                     }
 
                     ToolTip.visible: hovered
-                    ToolTip.text: "Clear all"
+                    ToolTip.text: "Clear All"
 
                     onClicked: {
-                        // TODO: Implement clear all functionality
-                        console.log("Clear all clicked")
+                        dialogManager.showClearConfirmation(function() {
+                            downloadsList.model.clear()
+                            downloadData = []
+                            updateTypesCounts()
+                        })
                     }
                 }
             }
@@ -259,6 +351,11 @@ Page {
                                 color: "#808080"
                             }
                         }
+
+                        onClicked: {
+                            // Implement filter logic here
+                            console.log("Selected type:", name)
+                        }
                     }
                 }
             }
@@ -275,55 +372,10 @@ Page {
                     color: "#1e1e1e"
                     visible: isLoading
 
-                    // BusyIndicator {
-                    //     anchors.centerIn: parent
-                    //     running: isLoading
-
-                    //     contentItem: Item {
-                    //         implicitWidth: 64
-                    //         implicitHeight: 64
-
-                    //         Item {
-                    //             id: item
-                    //             width: 64
-                    //             height: 64
-                    //             anchors.centerIn: parent
-                    //             opacity: parent.opacity
-
-                    //             RotationAnimator {
-                    //                 target: item
-                    //                 running: isLoading
-                    //                 from: 0
-                    //                 to: 360
-                    //                 duration: 1500
-                    //                 loops: Animation.Infinite
-                    //             }
-
-                    //             Repeater {
-                    //                 model: 8
-                    //                 Rectangle {
-                    //                     x: item.width/2 - width/2
-                    //                     y: item.height/2 - height/2
-                    //                     width: 4
-                    //                     height: 16
-                    //                     radius: 2
-                    //                     color: "#ffffff"
-                    //                     transform: [
-                    //                         Translate {
-                    //                             y: -24
-                    //                         },
-                    //                         Rotation {
-                    //                             angle: index * 45
-                    //                             origin.x: 2
-                    //                             origin.y: 24
-                    //                         }
-                    //                     ]
-                    //                     opacity: 0.25 + (index + 1) * 0.1
-                    //                 }
-                    //             }
-                    //         }
-                    //     }
-                    // }
+                    BusyIndicator {
+                        anchors.centerIn: parent
+                        running: isLoading
+                    }
 
                     Text {
                         anchors.centerIn: parent
@@ -356,8 +408,8 @@ Page {
                         selectByMouse: true
 
                         onTextChanged: {
-                            // TODO: Implement search functionality
-                            console.log("Search text changed:", text)
+                            // Implement search logic here
+                            console.log("Search text:", text)
                         }
                     }
 
@@ -376,9 +428,9 @@ Page {
                             delegate: Components.DownloadItem {
                                 width: downloadsList.width
                                 fileName: model.fileName
-                                fileSize: model.fileType
-                                progress: 100
-                                status: "Completed"
+                                // fileType: model.fileType
+                                progress: model.progress
+                                status: model.status
 
                                 MouseArea {
                                     anchors.fill: parent

@@ -1,3 +1,4 @@
+// mainwindow.hpp
 #pragma once
 
 #include <QWidget>
@@ -5,33 +6,35 @@
 #include <QQmlEngine>
 #include "windowcontroller.hpp"
 #include "core/downloadmanager.hpp"
-#include "utils/devicesmanager.hpp"  // Add this include
-#include "core/stemextractor/uvrhelper.hpp"  // Add this include
+#include "utils/devicesmanager.hpp"
+#include "core/stemextractor/uvrhelper.hpp"
+#include "dialogmanager.hpp"  // Add this include
+#include "core/ytdlphelper.hpp"  // Add this include
+
 
 class MainWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);  // Constructor
-    ~MainWindow() override = default;               // Destructor
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override = default;
 
 protected:
-    // Handles window resizing and state changes
     void resizeEvent(QResizeEvent *event) override;
     void changeEvent(QEvent *event) override;
 
 private:
-    // Helper functions
-    void setupWindow();  // Configures the main window properties
-    void setupQml();     // Sets up the QML environment
+    void setupWindow();
+    void setupQml();
 
-    // Member variables
-    QQuickView *m_quickView;         // Container for QML view
-    QQmlEngine *m_engine;           // QML engine for managing QML components
-    WindowController *m_windowController;  // Controller for window state and interaction
-    DownloadManager *m_downloadManager;    // Manager for handling downloads
-    DeviceManager *m_deviceManager;  // Add this member
-    UVRHelper *m_uvrHelper;  // Add this member
-    QWidget *m_quickWidget;         // Embeds QQuickView in the main window
+    QQuickView *m_quickView;
+    QQmlEngine *m_engine;
+    WindowController *m_windowController;
+    DownloadManager *m_downloadManager;
+    DeviceManager *m_deviceManager;
+    UVRHelper *m_uvrHelper;
+    DialogManager *m_dialogManager;  // Add this member
+    QWidget *m_quickWidget;
+    YtDlpHelper *m_ytDlpHelper;  // Add this member
 };

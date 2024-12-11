@@ -194,11 +194,12 @@ void UpdateYtDlp::handleError(QNetworkReply::NetworkError error) {
 }
 
 QString UpdateYtDlp::getYtDlpPath() const {
-    QString appPath = QCoreApplication::applicationDirPath();
+    QString baseDir = QCoreApplication::applicationDirPath();
+
 #ifdef Q_OS_WIN
-    return appPath + "/yt-dlp.exe";
+    return QDir::toNativeSeparators(baseDir + "/bin/yt-dlp.exe");
 #else
-    return appPath + "/yt-dlp";
+    return QDir::toNativeSeparators(baseDir + "/bin/yt-dlp");
 #endif
 }
 
