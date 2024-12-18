@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html, body {
+  font-family: "IBM Plex Sans", 'Sarabun', sans-serif;
+  letter-spacing: -0.025em;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+/* For Webkit browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+  width: 8px;               /* width of vertical scrollbar */
+  height: 8px;              /* height of horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;      /* dark background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;         /* scrollbar handle color */
+  border-radius: 4px;       /* rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;         /* darker on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;    /* "auto" or "thin" */
+  scrollbar-color: #444 #1a1a1a; /* thumb and track color */
+}

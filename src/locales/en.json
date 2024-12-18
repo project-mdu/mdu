@@ -1,0 +1,429 @@
+{
+  "app": {
+    "name": "Media Downloader Utility",
+    "status": {
+      "ready": "Ready"
+    }
+  },
+  "navigation": {
+    "downloader": "Downloader",
+    "converter": "Converter",
+    "stemExtractor": "Stem Extractor",
+    "remux": "Remux",
+    "settings": "Settings"
+  },
+  "downloads": {
+    "title": "Downloads",
+    "addModal": {
+      "title": "Add Download",
+      "urlPlaceholder": "Enter YouTube URL",
+      "fetch": "Fetch Info",
+      "selectFormat": "Select Format",
+      "download": "Download",
+      "videoInfo": "Video Information",
+      "quality": "Quality",
+      "size": "Size",
+      "format": "Format"
+    },
+    "actions": {
+      "addDownload": "Add Download",
+      "stopAll": "Stop All",
+      "clearHistory": "Clear History",
+      "stop": "Stop",
+      "remove": "Remove",
+      "retry": "Retry"
+    },
+    "status": {
+      "loading": "Loading...",
+      "noDownloads": "No downloads available",
+      "completed": "Completed",
+      "downloading": "Downloading",
+      "stopped": "Stopped",
+      "failed": "Failed",
+      "waiting": "Waiting"
+    },
+    "search": {
+      "placeholder": "Search downloads"
+    },
+    "errors": {
+      "emptyUrl": "Please enter a URL",
+      "invalidUrl": "Invalid URL",
+      "fetchError": "Failed to fetch video information",
+      "downloadError": "Download failed",
+      "networkError": "Network error",
+      "unsupportedFormat": "Unsupported format"
+    },
+    "format": {
+      "quality": "Quality",
+      "size": "Size",
+      "type": "Type",
+      "video": "Video",
+      "audio": "Audio",
+      "unknown": "Unknown",
+      "bestQuality": "Best Quality",
+      "highestRes": "Highest Resolution",
+      "lowestRes": "Lowest Resolution",
+      "audioOnly": "Audio Only"
+    },
+    "info": {
+      "duration": "Duration",
+      "uploader": "Uploader",
+      "views": "Views",
+      "uploadDate": "Upload Date",
+      "resolution": "Resolution",
+      "bitrate": "Bitrate",
+      "codec": "Codec",
+      "container": "Container"
+    },
+    "progress": {
+      "speed": "Speed",
+      "eta": "Time remaining",
+      "downloaded": "Downloaded",
+      "total": "Total",
+      "percentage": "Progress"
+    }
+  },
+  "common": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information",
+    "confirm": "Confirm",
+    "apply": "Apply",
+    "reset": "Reset",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "back": "Back",
+    "next": "Next",
+    "done": "Done",
+    "retry": "Retry",
+    "settings": "Settings"
+  },
+  "settings": {
+    "title": "Settings",
+    "sections": {
+      "general": "General",
+      "media": "Media",
+      "advanced": "Advanced",
+      "about": "About"
+    },
+    "tabs": {
+      "general": "General",
+      "language": "Language",
+      "appearance": "Appearance",
+      "directories": "Directories",
+      "downloads": "Downloads",
+      "audio": "Audio",
+      "video": "Video",
+      "network": "Network",
+      "privacy": "Privacy",
+      "advanced": "Advanced",
+      "about": "About"
+    },
+    "general": {
+      "title": "General Settings",
+      "startup": {
+        "title": "Startup",
+        "launchAtStartup": "Launch at startup",
+        "launchAtStartupDescription": "Automatically start the application when your computer starts",
+        "minimizeToTray": "Minimize to tray",
+        "minimizeToTrayDescription": "Keep the application running in the system tray when closed"
+      },
+      "updates": {
+        "title": "Updates",
+        "autoUpdate": "Automatic updates",
+        "autoUpdateDescription": "Automatically download and install updates",
+        "checkForUpdates": "Check for updates",
+        "currentVersion": "Current version"
+      },
+      "performance": {
+        "title": "Performance",
+        "hardwareAcceleration": "Hardware acceleration",
+        "hardwareAccelerationDescription": "Use GPU acceleration for better performance",
+        "processPriority": "Process priority",
+        "processPriorityDescription": "Set the application's process priority"
+      }
+    },
+    "language": {
+      "title": "Language Settings",
+      "display": "Display language",
+      "displayDescription": "Choose your preferred language",
+      "region": "Region format",
+      "regionDescription": "Date, time and number formats"
+    },
+    "appearance": {
+      "title": "Appearance Settings",
+      "theme": {
+        "title": "Theme",
+        "options": {
+          "light": "Light",
+          "dark": "Dark",
+          "system": "System"
+        }
+      },
+      "viewMode": {
+        "title": "View Mode",
+        "options": {
+          "grid": "Grid",
+          "list": "List",
+          "compact": "Compact"
+        }
+      },
+      "thumbnailSize": {
+        "title": "Thumbnail Size",
+        "options": {
+          "small": "Small",
+          "medium": "Medium",
+          "large": "Large"
+        }
+      },
+      "additional": {
+        "title": "Additional Options",
+        "showTitles": "Show titles under covers",
+        "animateCovers": "Animate covers on hover"
+      }
+    },
+    "directories": {
+      "title": "Directory Settings",
+      "downloads": {
+        "title": "Downloads Location",
+        "default": "Default downloads folder",
+        "custom": "Custom location",
+        "select": "Select folder"
+      },
+      "organization": {
+        "title": "File Organization",
+        "createSubfolders": "Create subfolders by type",
+        "useArtistName": "Use artist name in folder structure"
+      }
+    },
+    "downloads": {
+      "title": "Download Settings",
+      "concurrent": {
+        "title": "Concurrent Downloads",
+        "limit": "Maximum concurrent downloads",
+        "description": "Number of files to download simultaneously"
+      },
+      "bandwidth": {
+        "title": "Bandwidth",
+        "limit": "Speed limit",
+        "unlimited": "Unlimited"
+      },
+      "completion": {
+        "title": "On Completion",
+        "notification": "Show notification",
+        "sound": "Play sound",
+        "openFolder": "Open folder"
+      }
+    },
+    "audio": {
+      "title": "Audio Settings",
+      "quality": {
+        "title": "Quality",
+        "format": "Default format",
+        "bitrate": "Default bitrate"
+      },
+      "metadata": {
+        "title": "Metadata",
+        "embedArtwork": "Embed artwork",
+        "embedLyrics": "Embed lyrics",
+        "preserveTags": "Preserve existing tags"
+      }
+    },
+    "video": {
+      "title": "Video Settings",
+      "quality": {
+        "title": "Quality",
+        "resolution": "Default resolution",
+        "format": "Default format",
+        "codec": "Preferred codec"
+      },
+      "advanced": {
+        "title": "Advanced",
+        "hardware": "Hardware encoding",
+        "thumbnails": "Download thumbnails"
+      }
+    },
+    "network": {
+      "title": "Network Settings",
+      "proxy": {
+        "title": "Proxy",
+        "enable": "Enable proxy",
+        "host": "Host",
+        "port": "Port"
+      },
+      "connection": {
+        "title": "Connection",
+        "timeout": "Connection timeout",
+        "retries": "Maximum retries"
+      }
+    },
+    "privacy": {
+      "title": "Privacy Settings",
+      "data": {
+        "title": "Data Collection",
+        "analytics": "Enable analytics",
+        "crashReports": "Send crash reports"
+      },
+      "history": {
+        "title": "History",
+        "keep": "Keep download history",
+        "clear": "Clear history"
+      }
+    },
+    "advanced": {
+      "title": "Advanced Settings",
+      "experimental": {
+        "title": "Experimental Features",
+        "warning": "These features may be unstable",
+        "enable": "Enable experimental features"
+      },
+      "debugging": {
+        "title": "Debugging",
+        "verbose": "Verbose logging",
+        "console": "Show developer console"
+      }
+    },
+    "about": {
+      "title": "About",
+      "version": "Version",
+      "credits": "Credits",
+      "license": "License",
+      "updates": {
+        "title": "Updates",
+        "check": "Check for updates",
+        "current": "Current version",
+        "available": "Update available"
+      },
+      "links": {
+        "website": "Website",
+        "github": "GitHub",
+        "donate": "Donate"
+      }
+    }
+  },
+  "status": {
+    "ready": "Ready",
+    "app_version": "App Version",
+    "os": "OS",
+    "cpu": "CPU",
+    "memory": "Memory",
+    "error": {
+      "loading": "Error loading system information",
+      "update": "Error updating system status"
+    },
+    "performance": {
+      "usage": "Usage",
+      "total": "Total",
+      "available": "Available",
+      "speed": "Speed"
+    }
+  },
+  "sidebar": {
+    "categories": {
+      "title": "Categories",
+      "downloads": "Downloads",
+      "queue": "Queue",
+      "completed": "Completed"
+    },
+    "drives": {
+      "title": "Drives",
+      "refresh": "Refresh drives",
+      "loading": "Loading drives...",
+      "free": "free",
+      "total": "total",
+      "error": {
+        "loading": "Failed to load drives"
+      }
+    },
+    "network": {
+      "title": "Network",
+      "speed": "Speed",
+      "download": "Download",
+      "upload": "Upload",
+      "total": "Total"
+    }
+  },
+  "about": {
+    "app": {
+      "title": "Media Downloader Utility",
+      "subtitle": "Manga downloading and reading application",
+      "version": "Version",
+      "build": "Build",
+      "date": "Build Date",
+      "platform": "System Information",
+      "os": "Operating System",
+      "arch": "Architecture",
+      "commit": "Commit Hash",
+      "channels": {
+        "title": "Update Channel",
+        "stable": "Stable",
+        "beta": "Beta",
+        "nightly": "Nightly"
+      }
+    },
+    "update": {
+      "title": "Updates",
+      "check": "Check for Updates",
+      "checking": "Checking for updates...",
+      "available": "New version {{version}} available",
+      "latest": "You are using the latest version",
+      "error": "Failed to check for updates",
+      "notes": "Release Notes",
+      "download": "Download Update",
+      "restart": "Restart to Update",
+      "progress": "Downloading update...",
+      "status": {
+        "checking": "Checking for updates...",
+        "downloading": "Downloading update...",
+        "installing": "Installing update...",
+        "ready": "Ready to restart"
+      }
+    },
+    "links": {
+      "title": "Quick Links",
+      "github": "GitHub",
+      "website": "Website",
+      "issues": "Report Issues",
+      "discord": "Discord Community"
+    },
+    "help": {
+      "title": "Help & Support",
+      "documentation": "Documentation",
+      "report": "Report an Issue",
+      "discord": "Join Discord Community",
+      "faq": "FAQ",
+      "contribute": "How to Contribute"
+    },
+    "legal": {
+      "title": "Legal & Credits",
+      "license": "License",
+      "credits": "Credits",
+      "third_party": "Third-party Licenses",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "support": {
+      "title": "Support Development",
+      "description": "Consider supporting the project if you find it useful",
+      "donate": "Buy me a coffee",
+      "star": "Star on GitHub",
+      "share": "Share with Friends",
+      "sponsor": "Become a Sponsor"
+    },
+    "footer": {
+      "made": "Made with",
+      "by": "by",
+      "and": "and",
+      "community": "the open source community",
+      "copyright": "© {{year}} All rights reserved"
+    }
+  }
+}

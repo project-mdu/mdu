@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "mdu",
+  "version": "0.1.0",
+  "identifier": "net.khaoniewji.mdu",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Media Downloader Utility",
+        "width": 1024,
+        "height": 600
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/ap2.ico"
+    ]
+  }
+}

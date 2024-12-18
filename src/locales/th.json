@@ -1,0 +1,385 @@
+
+{
+  "app": {
+    "name": "Media Downloader Utility",
+    "status": {
+      "ready": "พร้อมใช้งาน"
+    }
+  },
+  "navigation": {
+    "downloader": "ดาวน์โหลด",
+    "converter": "แปลงไฟล์",
+    "stemExtractor": "แยกเสียง",
+    "remux": "รีมักซ์",
+    "settings": "ตั้งค่า"
+  },
+  "downloads": {
+    "title": "ดาวน์โหลด",
+    "addModal": {
+      "title": "เพิ่มการดาวน์โหลด",
+      "urlPlaceholder": "ใส่ URL ของ YouTube",
+      "fetch": "ดึงข้อมูล",
+      "selectFormat": "เลือกรูปแบบ",
+      "download": "ดาวน์โหลด"
+    },
+    "actions": {
+      "addDownload": "เพิ่มการดาวน์โหลด",
+      "stopAll": "หยุดทั้งหมด",
+      "clearHistory": "ล้างประวัติ"
+    },
+    "status": {
+      "loading": "กำลังโหลด...",
+      "noDownloads": "ไม่มีรายการดาวน์โหลด"
+    },
+    "search": {
+      "placeholder": "ค้นหารายการดาวน์โหลด"
+    },
+    "errors": {
+      "emptyUrl": "กรุณาใส่ URL",
+      "invalidUrl": "URL ไม่ถูกต้อง",
+      "fetchError": "ไม่สามารถดึงข้อมูลวิดีโอได้"
+    },
+    "format": {
+      "quality": "คุณภาพ",
+      "size": "ขนาด",
+      "type": "ประเภท",
+      "video": "วิดีโอ",
+      "audio": "เสียง"
+    },
+    "info": {
+      "duration": "ความยาว",
+      "uploader": "ผู้อัพโหลด",
+      "views": "ยอดวิว"
+    }
+  },
+  "common": {
+    "cancel": "ยกเลิก",
+    "close": "ปิด",
+    "save": "บันทึก",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "loading": "กำลังโหลด...",
+    "error": "เกิดข้อผิดพลาด",
+    "success": "สำเร็จ"
+  },
+  "settings": {
+    "title": "ตั้งค่า",
+    "sections": {
+      "general": "ทั่วไป",
+      "media": "สื่อ",
+      "advanced": "ขั้นสูง",
+      "about": "เกี่ยวกับ"
+    },
+    "tabs": {
+      "general": "ทั่วไป",
+      "language": "ภาษา",
+      "appearance": "การแสดงผล",
+      "directories": "ไดเรกทอรี",
+      "downloads": "ดาวน์โหลด",
+      "audio": "เสียง",
+      "video": "วิดีโอ",
+      "network": "เครือข่าย",
+      "privacy": "ความเป็นส่วนตัว",
+      "advanced": "ขั้นสูง",
+      "about": "เกี่ยวกับ"
+    },
+    "general": {
+      "title": "การตั้งค่าทั่วไป",
+      "startup": {
+        "title": "การเริ่มต้น",
+        "launchAtStartup": "เริ่มทำงานเมื่อเปิดเครื่อง",
+        "launchAtStartupDescription": "เริ่มแอปพลิเคชันโดยอัตโนมัติเมื่อคอมพิวเตอร์เริ่มทำงาน",
+        "minimizeToTray": "ย่อลงถาดระบบ",
+        "minimizeToTrayDescription": "เก็บแอปพลิเคชันไว้ในถาดระบบเมื่อปิด"
+      },
+      "updates": {
+        "title": "อัปเดต",
+        "autoUpdate": "อัปเดตอัตโนมัติ",
+        "autoUpdateDescription": "ดาวน์โหลดและติดตั้งอัปเดตโดยอัตโนมัติ",
+        "checkForUpdates": "ตรวจสอบอัปเดต",
+        "currentVersion": "เวอร์ชันปัจจุบัน"
+      },
+      "performance": {
+        "title": "ประสิทธิภาพ",
+        "hardwareAcceleration": "การเร่งความเร็วด้วยฮาร์ดแวร์",
+        "hardwareAccelerationDescription": "ใช้ GPU เพื่อเพิ่มประสิทธิภาพ",
+        "processPriority": "ลำดับความสำคัญของโปรเซส",
+        "processPriorityDescription": "ตั้งค่าลำดับความสำคัญของแอปพลิเคชัน"
+      }
+    },
+    "language": {
+      "title": "การตั้งค่าภาษา",
+      "display": "ภาษาที่แสดง",
+      "displayDescription": "เลือกภาษาที่ต้องการ",
+      "region": "รูปแบบภูมิภาค",
+      "regionDescription": "รูปแบบวันที่ เวลา และตัวเลข"
+    },
+    "appearance": {
+      "title": "ตั้งค่าการแสดงผล",
+      "theme": {
+        "title": "ธีม",
+        "options": {
+          "light": "สว่าง",
+          "dark": "มืด",
+          "system": "ระบบ"
+        }
+      },
+      "viewMode": {
+        "title": "โหมดการแสดงผล",
+        "options": {
+          "grid": "ตาราง",
+          "list": "รายการ",
+          "compact": "กะทัดรัด"
+        }
+      },
+      "thumbnailSize": {
+        "title": "ขนาดรูปย่อ",
+        "options": {
+          "small": "เล็ก",
+          "medium": "กลาง",
+          "large": "ใหญ่"
+        }
+      },
+      "additional": {
+        "title": "ตัวเลือกเพิ่มเติม",
+        "showTitles": "แสดงชื่อใต้ปก",
+        "animateCovers": "แอนิเมชันปกเมื่อชี้"
+      }
+    },
+    "directories": {
+      "title": "การตั้งค่าไดเรกทอรี",
+      "downloads": {
+        "title": "ตำแหน่งดาวน์โหลด",
+        "default": "โฟลเดอร์ดาวน์โหลดเริ่มต้น",
+        "custom": "ตำแหน่งที่กำหนดเอง",
+        "select": "เลือกโฟลเดอร์"
+      },
+      "organization": {
+        "title": "การจัดระเบียบไฟล์",
+        "createSubfolders": "สร้างโฟลเดอร์ย่อยตามประเภท",
+        "useArtistName": "ใช้ชื่อศิลปินในโครงสร้างโฟลเดอร์"
+      }
+    },
+    "downloads": {
+      "title": "การตั้งค่าการดาวน์โหลด",
+      "concurrent": {
+        "title": "การดาวน์โหลดพร้อมกัน",
+        "limit": "จำนวนการดาวน์โหลดพร้อมกันสูงสุด",
+        "description": "จำนวนไฟล์ที่จะดาวน์โหลดพร้อมกัน"
+      },
+      "bandwidth": {
+        "title": "แบนด์วิดธ์",
+        "limit": "จำกัดความเร็ว",
+        "unlimited": "ไม่จำกัด"
+      },
+      "completion": {
+        "title": "เมื่อเสร็จสิ้น",
+        "notification": "แสดงการแจ้งเตือน",
+        "sound": "เล่นเสียง",
+        "openFolder": "เปิดโฟลเดอร์"
+      }
+    },
+    "audio": {
+      "title": "การตั้งค่าเสียง",
+      "quality": {
+        "title": "คุณภาพ",
+        "format": "รูปแบบเริ่มต้น",
+        "bitrate": "บิตเรตเริ่มต้น"
+      },
+      "metadata": {
+        "title": "ข้อมูลเมตา",
+        "embedArtwork": "ฝังภาพปก",
+        "embedLyrics": "ฝังเนื้อเพลง",
+        "preserveTags": "เก็บแท็กที่มีอยู่"
+      }
+    },
+    "video": {
+      "title": "การตั้งค่าวิดีโอ",
+      "quality": {
+        "title": "คุณภาพ",
+        "resolution": "ความละเอียดเริ่มต้น",
+        "format": "รูปแบบเริ่มต้น",
+        "codec": "ตัวเข้ารหัสที่ต้องการ"
+      },
+      "advanced": {
+        "title": "ขั้นสูง",
+        "hardware": "การเข้ารหัสด้วยฮาร์ดแวร์",
+        "thumbnails": "ดาวน์โหลดภาพขนาดย่อ"
+      }
+    },
+    "network": {
+      "title": "การตั้งค่าเครือข่าย",
+      "proxy": {
+        "title": "พร็อกซี",
+        "enable": "เปิดใช้งานพร็อกซี",
+        "host": "โฮสต์",
+        "port": "พอร์ต"
+      },
+      "connection": {
+        "title": "การเชื่อมต่อ",
+        "timeout": "หมดเวลาการเชื่อมต่อ",
+        "retries": "จำนวนลองใหม่สูงสุด"
+      }
+    },
+    "privacy": {
+      "title": "การตั้งค่าความเป็นส่วนตัว",
+      "data": {
+        "title": "การเก็บข้อมูล",
+        "analytics": "เปิดใช้งานการวิเคราะห์",
+        "crashReports": "ส่งรายงานข้อผิดพลาด"
+      },
+      "history": {
+        "title": "ประวัติ",
+        "keep": "เก็บประวัติการดาวน์โหลด",
+        "clear": "ล้างประวัติ"
+      }
+    },
+    "advanced": {
+      "title": "การตั้งค่าขั้นสูง",
+      "experimental": {
+        "title": "คุณสมบัติทดลอง",
+        "warning": "คุณสมบัติเหล่านี้อาจไม่เสถียร",
+        "enable": "เปิดใช้งานคุณสมบัติทดลอง"
+      },
+      "debugging": {
+        "title": "การแก้ไขข้อบกพร่อง",
+        "verbose": "บันทึกแบบละเอียด",
+        "console": "แสดงคอนโซลสำหรับนักพัฒนา"
+      }
+    },
+    "about": {
+      "title": "เกี่ยวกับ",
+      "version": "เวอร์ชัน",
+      "credits": "เครดิต",
+      "license": "ลิขสิทธิ์",
+      "updates": {
+        "title": "อัปเดต",
+        "check": "ตรวจสอบอัปเดต",
+        "current": "เวอร์ชันปัจจุบัน",
+        "available": "มีอัปเดตใหม่"
+      },
+      "links": {
+        "website": "เว็บไซต์",
+        "github": "GitHub",
+        "donate": "บริจาค"
+      }
+    }
+  },
+  "status": {
+    "ready": "พร้อมใช้งาน",
+    "app_version": "เวอร์ชันแอป",
+    "os": "OS",
+    "cpu": "CPU",
+    "memory": "หน่วยความจำ",
+    "error": {
+      "loading": "เกิดข้อผิดพลาดในการโหลดข้อมูลระบบ",
+      "update": "เกิดข้อผิดพลาดในการอัปเดตสถานะระบบ"
+    },
+    "performance": {
+      "usage": "การใช้งาน",
+      "total": "ทั้งหมด",
+      "available": "ที่ใช้ได้",
+      "speed": "ความเร็ว"
+    }
+  },
+  "sidebar": {
+    "categories": {
+      "title": "หมวดหมู่",
+      "downloads": "ดาวน์โหลด",
+      "queue": "คิว",
+      "completed": "เสร็จสิ้น"
+    },
+    "drives": {
+      "title": "ไดรฟ์",
+      "refresh": "รีเฟรชไดรฟ์",
+      "loading": "กำลังโหลดไดรฟ์...",
+      "free": "ว่าง",
+      "total": "ทั้งหมด",
+      "error": {
+        "loading": "ไม่สามารถโหลดไดรฟ์ได้"
+      }
+    },
+    "network": {
+      "title": "เครือข่าย",
+      "speed": "ความเร็ว",
+      "download": "ดาวน์โหลด",
+      "upload": "อัพโหลด",
+      "total": "รวม"
+    }
+  },
+  "about": {
+    "app": {
+      "title": "Media Downloader Utility",
+      "subtitle": "แอปพลิเคชันดาวน์โหลดและอ่านมังงะ",
+      "version": "เวอร์ชัน",
+      "build": "บิลด์",
+      "date": "วันที่บิลด์",
+      "platform": "ข้อมูลระบบ",
+      "os": "ระบบปฏิบัติการ",
+      "arch": "สถาปัตยกรรม",
+      "commit": "รหัสคอมมิต",
+      "channels": {
+        "title": "ช่องทางอัปเดต",
+        "stable": "เสถียร",
+        "beta": "ทดสอบ",
+        "nightly": "รายคืน"
+      }
+    },
+    "update": {
+      "title": "อัปเดต",
+      "check": "ตรวจสอบอัปเดต",
+      "checking": "กำลังตรวจสอบอัปเดต...",
+      "available": "มีเวอร์ชันใหม่ {{version}} พร้อมใช้งาน",
+      "latest": "คุณกำลังใช้เวอร์ชันล่าสุด",
+      "error": "ไม่สามารถตรวจสอบอัปเดตได้",
+      "notes": "บันทึกการเปลี่ยนแปลง",
+      "download": "ดาวน์โหลดอัปเดต",
+      "restart": "รีสตาร์ทเพื่ออัปเดต",
+      "progress": "กำลังดาวน์โหลดอัปเดต...",
+      "status": {
+        "checking": "กำลังตรวจสอบอัปเดต...",
+        "downloading": "กำลังดาวน์โหลดอัปเดต...",
+        "installing": "กำลังติดตั้งอัปเดต...",
+        "ready": "พร้อมรีสตาร์ท"
+      }
+    },
+    "links": {
+      "title": "ลิงก์ด่วน",
+      "github": "GitHub",
+      "website": "เว็บไซต์",
+      "issues": "รายงานปัญหา",
+      "discord": "ชุมชน Discord"
+    },
+    "help": {
+      "title": "ความช่วยเหลือและสนับสนุน",
+      "documentation": "เอกสารประกอบ",
+      "report": "รายงานปัญหา",
+      "discord": "เข้าร่วมชุมชน Discord",
+      "faq": "คำถามที่พบบ่อย",
+      "contribute": "วิธีมีส่วนร่วม"
+    },
+    "legal": {
+      "title": "กฎหมายและเครดิต",
+      "license": "ใบอนุญาต",
+      "credits": "เครดิต",
+      "third_party": "ใบอนุญาตบุคคลที่สาม",
+      "privacy": "นโยบายความเป็นส่วนตัว",
+      "terms": "ข้อกำหนดการใช้งาน"
+    },
+    "support": {
+      "title": "สนับสนุนการพัฒนา",
+      "description": "พิจารณาสนับสนุนโครงการหากคุณพบว่ามีประโยชน์",
+      "donate": "เลี้ยงกาแฟ",
+      "star": "ให้ดาวบน GitHub",
+      "share": "แชร์ให้เพื่อน",
+      "sponsor": "เป็นผู้สนับสนุน"
+    },
+    "footer": {
+      "made": "สร้างด้วย",
+      "by": "โดย",
+      "and": "และ",
+      "community": "ชุมชนโอเพนซอร์ส",
+      "copyright": "© {{year}} สงวนลิขสิทธิ์"
+    }
+  }
+}
