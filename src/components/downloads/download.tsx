@@ -86,8 +86,8 @@ function Downloads() {
 
   return (
     <div className="h-full flex flex-col bg-[#121212]">
-      <div className="h-8 bg-[#1a1a1a] flex items-center justify-between px-4 border-b border-[#2e2e2e]">
-        <div className="flex items-center space-x-2">
+      <div className="h-8 bg-[#1a1a1a] flex items-center justify-between px-2 border-b border-[#2e2e2e]">
+        <div className="flex items-center space-x-1">
           <Download className="w-4 h-4 text-blue-400" />
           <span className="text-xs text-gray-200 font-medium">
             {t('downloads.title')}

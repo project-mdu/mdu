@@ -23,7 +23,14 @@
       "videoInfo": "Video Information",
       "quality": "Quality",
       "size": "Size",
-      "format": "Format"
+      "format": "Format",
+      "encodingOptions": "Encoding Options",
+      "audioQuality": "Audio Quality",
+      "videoQuality": "Video Quality",
+      "outputFormat": "Output Format",
+      "audioQualityHint": "Audio bitrate in kbps",
+      "videoQualityHint": "Video resolution",
+      "outputFormatHint": "Container format"
     },
     "actions": {
       "addDownload": "Add Download",

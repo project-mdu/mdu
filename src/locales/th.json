@@ -20,7 +20,14 @@
       "urlPlaceholder": "ใส่ URL ของ YouTube",
       "fetch": "ดึงข้อมูล",
       "selectFormat": "เลือกรูปแบบ",
-      "download": "ดาวน์โหลด"
+      "download": "ดาวน์โหลด",
+      "encodingOptions": "ตัวเลือกการเข้ารหัส",
+      "audioQuality": "คุณภาพเสียง",
+      "videoQuality": "คุณภาพวิดีโอ",
+      "outputFormat": "รูปแบบไฟล์",
+      "audioQualityHint": "บิตเรตของเสียง (kbps)",
+      "videoQualityHint": "ความละเอียดวิดีโอ",
+      "outputFormatHint": "รูปแบบคอนเทนเนอร์"
     },
     "actions": {
       "addDownload": "เพิ่มการดาวน์โหลด",

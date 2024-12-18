@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { X, Video, Music, Download } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { invoke } from "@tauri-apps/api/core";
-// import ErrorBoundary from "../errorboundary";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Format {
@@ -25,10 +24,20 @@ interface VideoInfo {
   uploader?: string;
 }
 
+interface EncodingOptions {
+  audioQuality: string;
+  videoQuality: string;
+  format: string;
+}
+
 interface AddDownloadProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddDownload: (url: string, format: string) => Promise<void>;
+  onAddDownload: (
+    url: string,
+    format: string,
+    encodingOptions: EncodingOptions
+  ) => Promise<void>;
 }
 
 // Animation variants
@@ -64,6 +73,15 @@ const AddDownload: React.FC<AddDownloadProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [videoInfo, setVideoInfo] = useState<VideoInfo | null>(null);
   const [selectedFormat, setSelectedFormat] = useState<string>("");
+  const [encodingOptions, setEncodingOptions] = useState<EncodingOptions>({
+    audioQuality: "192",
+    videoQuality: "1080",
+    format: "mp4",
+  });
+
+  const audioQualityOptions = ["64", "128", "192", "256", "320"];
+  const videoQualityOptions = ["480", "720", "1080", "1440", "2160"];
+  const formatOptions = ["mp4", "mkv", "webm"];
 
   const resetState = () => {
     setUrl("");
@@ -71,6 +89,11 @@ const AddDownload: React.FC<AddDownloadProps> = ({
     setVideoInfo(null);
     setSelectedFormat("");
     setIsLoading(false);
+    setEncodingOptions({
+      audioQuality: "192",
+      videoQuality: "1080",
+      format: "mp4",
+    });
   };
 
   const handleClose = () => {
@@ -120,7 +143,7 @@ const AddDownload: React.FC<AddDownloadProps> = ({
     }
 
     try {
-      await onAddDownload(url, selectedFormat);
+      await onAddDownload(url, selectedFormat, encodingOptions);
       handleClose();
     } catch (err) {
       console.error("Download error:", err);
@@ -134,6 +157,87 @@ const AddDownload: React.FC<AddDownloadProps> = ({
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`;
   };
+
+  const renderEncodingOptions = () => (
+    <div className="space-y-3">
+      <h3 className="text-gray-300 text-sm font-medium">
+        {t("downloads.addModal.encodingOptions")}
+      </h3>
+      <div className="grid grid-cols-3 gap-4">
+        {/* Audio Quality */}
+        <div className="space-y-1">
+          <label className="text-gray-400 text-xs">
+            {t("downloads.addModal.audioQuality")} (kbps)
+          </label>
+          <select
+            value={encodingOptions.audioQuality}
+            onChange={(e) =>
+              setEncodingOptions((prev) => ({
+                ...prev,
+                audioQuality: e.target.value,
+              }))
+            }
+            className="w-full bg-[#2a2a2a] text-gray-200 text-sm rounded-md px-2 py-1
+                      border border-[#3e3e3e] focus:outline-none focus:border-blue-500"
+          >
+            {audioQualityOptions.map((quality) => (
+              <option key={quality} value={quality}>
+                {quality}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Video Quality */}
+        <div className="space-y-1">
+          <label className="text-gray-400 text-xs">
+            {t("downloads.addModal.videoQuality")} (p)
+          </label>
+          <select
+            value={encodingOptions.videoQuality}
+            onChange={(e) =>
+              setEncodingOptions((prev) => ({
+                ...prev,
+                videoQuality: e.target.value,
+              }))
+            }
+            className="w-full bg-[#2a2a2a] text-gray-200 text-sm rounded-md px-2 py-1
+                      border border-[#3e3e3e] focus:outline-none focus:border-blue-500"
+          >
+            {videoQualityOptions.map((quality) => (
+              <option key={quality} value={quality}>
+                {quality}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Output Format */}
+        <div className="space-y-1">
+          <label className="text-gray-400 text-xs">
+            {t("downloads.addModal.outputFormat")}
+          </label>
+          <select
+            value={encodingOptions.format}
+            onChange={(e) =>
+              setEncodingOptions((prev) => ({
+                ...prev,
+                format: e.target.value,
+              }))
+            }
+            className="w-full bg-[#2a2a2a] text-gray-200 text-sm rounded-md px-2 py-1
+                      border border-[#3e3e3e] focus:outline-none focus:border-blue-500"
+          >
+            {formatOptions.map((format) => (
+              <option key={format} value={format}>
+                {format.toUpperCase()}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </div>
+  );
 
   if (!isOpen) return null;
 
@@ -261,6 +365,9 @@ const AddDownload: React.FC<AddDownloadProps> = ({
                       )}
                     </div>
                   </div>
+
+                  {/* Encoding Options */}
+                  {renderEncodingOptions()}
 
                   {/* Format Selection */}
                   <div className="space-y-2">
