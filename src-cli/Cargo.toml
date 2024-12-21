@@ -1,0 +1,11 @@
+# ./src-cli/Cargo.toml
+[package]
+name = "mdu-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.42.0", features = ["full"] }
+clap = { version = "4.0", features = ["derive"] }
+mdu = { path = "../src-tauri" }  # Reference the existing mdu package
+anyhow = "1.0.94"

@@ -7,11 +7,60 @@ import {
     FileOutput,
     Music2,
     Film,
-    Settings as SettingsIcon,
-    MenuIcon
+    Settings as SettingsIcon
 } from 'lucide-react';
 import { Settings } from '../settings';
+import { createMenuItems } from '../../constants/menuitems';
+function MenuBar() {
+    const { t } = useTranslation();
+    const [activeMenu, setActiveMenu] = useState<string | null>(null);
+    // const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
+    const menuItems = createMenuItems(t);
+
+    return (
+        <div className="relative flex items-center space-x-0">
+            {Object.keys(menuItems).map((menuTitle) => (
+                <div key={menuTitle} className="relative">
+                    <button
+                        className={`flex items-center space-x-2 text-xs px-2 py-1 hover:bg-[#2d2d2d] rounded ${
+                            activeMenu === menuTitle ? 'bg-[#2d2d2d]' : ''
+                        }`}
+                        onClick={() => setActiveMenu(activeMenu === menuTitle ? null : menuTitle)}
+                        onMouseEnter={() => activeMenu && setActiveMenu(menuTitle)}
+                    >
+                        {menuTitle}
+                    </button>
+                    
+                    {/* Dropdown Menu */}
+                    {activeMenu === menuTitle && (
+                        <div className="absolute top-full left-0 mt-1 bg-[#2d2d2d] rounded-md shadow-lg py-1 min-w-[200px] z-50">
+                            {menuItems[menuTitle as keyof typeof menuItems].map((item, index) => (
+                                item.type === 'separator' ? (
+                                    <div key={index} className="h-[1px] bg-gray-700 my-1" />
+                                ) : (
+                                    <button
+                                        key={index}
+                                        className="w-full px-4 py-1.5 text-left text-xs hover:bg-[#3d3d3d] flex justify-between items-center"
+                                        onClick={() => {
+                                            // Handle menu item click
+                                            setActiveMenu(null);
+                                        }}
+                                    >
+                                        <span>{item.label}</span>
+                                        {item.shortcut && (
+                                            <span className="text-gray-400 ml-4">{item.shortcut}</span>
+                                        )}
+                                    </button>
+                                )
+                            ))}
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    );
+}
 function Header() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -48,12 +97,7 @@ function Header() {
             {/* Header Bar */}
             <div className="text-gray-200 h-8 flex items-center justify-between bg-[#1a1a1a] px-2 border-b border-[#2e2e2e]">
                 {/* Menu */}
-                <div className="">
-                    <button className='flex items-center space-x-2 text-xs'>
-                        <MenuIcon className="w-3.5 h-3.5" />
-                        <p>Menu</p>
-                    </button>
-                </div>
+                <MenuBar />
 
                 {/* Navigation */}
                 <div className="flex items-center space-x-4">
@@ -63,8 +107,8 @@ function Header() {
                             key={item.path}
                             onClick={() => navigate(item.path)}
                             className={`text-xs flex items-center ${isActive(item.path)
-                                    ? 'text-blue-400'
-                                    : 'opacity-70 hover:opacity-100 hover:text-blue-400'
+                                ? 'text-blue-400'
+                                : 'opacity-70 hover:opacity-100 hover:text-blue-400'
                                 } duration-150`}
                         >
                             <item.icon className="w-3.5 h-3.5 mr-1" />
@@ -79,8 +123,8 @@ function Header() {
                     <button
                         onClick={() => setShowSettings(true)}
                         className={`p-1 rounded-md ${showSettings
-                                ? 'text-blue-400 bg-[#2d2d2d]'
-                                : 'text-gray-400 hover:text-gray-200'
+                            ? 'text-blue-400 bg-[#2d2d2d]'
+                            : 'text-gray-400 hover:text-gray-200'
                             } duration-150`}
                         title={t('navigation.settings')}
                     >

@@ -1,4 +1,3 @@
-
 {
   "app": {
     "name": "Media Downloader Utility",
@@ -387,6 +386,301 @@
       "and": "และ",
       "community": "ชุมชนโอเพนซอร์ส",
       "copyright": "© {{year}} สงวนลิขสิทธิ์"
+    }
+  },
+  "converter": {
+    "title": "ตัวแปลงสื่อ",
+    "actions": {
+      "addNew": "เพิ่มใหม่",
+      "addFirst": "เพิ่มการแปลงแรก",
+      "stopAll": "หยุดทั้งหมด",
+      "clearHistory": "ล้างประวัติ",
+      "stop": "หยุด",
+      "delete": "ลบ",
+      "openFile": "เปิดไฟล์",
+      "openFolder": "เปิดโฟลเดอร์",
+      "showDetails": "แสดงรายละเอียด",
+      "hideDetails": "ซ่อนรายละเอียด"
+    },
+    "status": {
+      "active": "กำลังทำงาน",
+      "converting": "กำลังแปลง",
+      "waiting": "กำลังรอ",
+      "completed": "เสร็จสิ้น",
+      "failed": "ล้มเหลว",
+      "stopped": "หยุดแล้ว",
+      "loading": "กำลังโหลดรายการแปลง...",
+      "noConversions": "ไม่พบรายการแปลง",
+      "preparing": "กำลังเตรียมการ...",
+      "analyzing": "กำลังวิเคราะห์สื่อ...",
+      "finalizing": "กำลังเสร็จสิ้น..."
+    },
+    "search": {
+      "placeholder": "ค้นหารายการแปลง..."
+    },
+    "modal": {
+      "title": "เพิ่มการแปลงใหม่",
+      "input": "ไฟล์ต้นฉบับ",
+      "output": "ตำแหน่งไฟล์เป้าหมาย",
+      "selectFile": "เลือกไฟล์สื่อ",
+      "selectDestination": "เลือกโฟลเดอร์เป้าหมาย",
+      "mediaFiles": "ไฟล์สื่อ",
+      "browse": "เรียกดู",
+      "format": "รูปแบบเอาต์พุต",
+      "selectFormat": "เลือกรูปแบบ",
+      "qualityTitle": "ค่าคุณภาพที่ตั้งไว้",  
+      "qualityHigh": "คุณภาพสูง",              
+      "qualityMedium": "คุณภาพปานกลาง",     
+      "qualityLow": "คุณภาพต่ำ",             
+      "qualityCustom": "กำหนดเอง",            
+      "videoSettings": "ตั้งค่าวิดีโอ",
+      "audioSettings": "ตั้งค่าเสียง",
+      "videoCodec": "ตัวเข้ารหัสวิดีโอ",
+      "audioCodec": "ตัวเข้ารหัสเสียง",
+      "encodingEngine": "เอนจินเข้ารหัส",
+      "audioEngine": "เอนจินเสียง",
+      "resolution": "ความละเอียด",
+      "videoBitrate": "บิตเรตวิดีโอ",
+      "audioBitrate": "บิตเรตเสียง",
+      "framerate": "เฟรมเรต",
+      "sampleRate": "อัตราการสุ่ม",
+      "channels": "ช่องเสียง",
+      "processing": "กำลังประมวลผล...",
+      "convert": "เริ่มการแปลง",
+      "cancel": "ยกเลิก"
+    },
+    "formats": {
+      "video": {
+        "mp4": {
+          "name": "MP4",
+          "description": "วิดีโอ MPEG-4"
+        },
+        "mkv": {
+          "name": "MKV",
+          "description": "วิดีโอ Matroska"
+        },
+        "webm": {
+          "name": "WebM",
+          "description": "รูปแบบวิดีโอเว็บ"
+        },
+        "avi": {
+          "name": "AVI",
+          "description": "รูปแบบ Audio Video Interleave"
+        }
+      },
+      "audio": {
+        "mp3": {
+          "name": "MP3",
+          "description": "เสียง MPEG Layer III"
+        },
+        "aac": {
+          "name": "AAC",
+          "description": "การเข้ารหัสเสียงขั้นสูง"
+        },
+        "wav": {
+          "name": "WAV",
+          "description": "เสียง Waveform"
+        },
+        "flac": {
+          "name": "FLAC",
+          "description": "การเข้ารหัสเสียงแบบไร้การสูญเสีย"
+        },
+        "opus": {
+          "name": "Opus",
+          "description": "เสียง Opus คุณภาพสูง"
+        }
+      }
+    },
+    "codecs": {
+      "video": {
+        "h264": {
+          "name": "H.264/AVC",
+          "description": "การเข้ารหัสวิดีโอขั้นสูง",
+          "engines": {
+            "cpu": "ซีพียู (ซอฟต์แวร์)",
+            "qsv": "Intel QuickSync",
+            "nvenc": "NVIDIA NVENC",
+            "amf": "AMD AMF"
+          }
+        },
+        "hevc": {
+          "name": "H.265/HEVC",
+          "description": "การเข้ารหัสวิดีโอประสิทธิภาพสูง",
+          "engines": {
+            "cpu": "ซีพียู (ซอฟต์แวร์)",
+            "qsv": "Intel QuickSync",
+            "nvenc": "NVIDIA NVENC",
+            "amf": "AMD AMF"
+          }
+        },
+        "av1": {
+          "name": "AV1",
+          "description": "การเข้ารหัสวิดีโอ AOMedia 1",
+          "engines": {
+            "cpu": "ซีพียู (SVT-AV1)",
+            "qsv": "Intel QuickSync",
+            "aom": "AOM อ้างอิง"
+          }
+        }
+      },
+      "audio": {
+        "aac": {
+          "name": "AAC",
+          "description": "การเข้ารหัสเสียงขั้นสูง",
+          "engines": {
+            "default": "FFmpeg AAC"
+          }
+        },
+        "opus": {
+          "name": "Opus",
+          "description": "ตัวเข้ารหัสเสียง Opus แบบโต้ตอบ",
+          "engines": {
+            "default": "libopus"
+          }
+        },
+        "mp3": {
+          "name": "MP3",
+          "description": "เสียง MPEG Layer III",
+          "engines": {
+            "default": "LAME MP3"
+          }
+        }
+      }
+    },
+    "channels": {
+      "mono": "โมโน (1)",
+      "stereo": "สเตอริโอ (2)",
+      "surround51": "เซอร์ราวด์ 5.1 (6)",
+      "surround71": "เซอร์ราวด์ 7.1 (8)"
+    },
+    "quality": {
+      "presets": {
+        "high": {
+          "name": "สูง",
+          "description": "คุณภาพดีที่สุด ไฟล์ใหญ่"
+        },
+        "medium": {
+          "name": "ปานกลาง",
+          "description": "สมดุลระหว่างคุณภาพและขนาด"
+        },
+        "low": {
+          "name": "ต่ำ",
+          "description": "ไฟล์ขนาดเล็ก คุณภาพลดลง"
+        }
+      }
+    },
+    "info": {
+      "resolution": "ความละเอียด",
+      "duration": "ความยาว",
+      "bitrate": "บิตเรต",
+      "codec": "ตัวเข้ารหัสปัจจุบัน",
+      "fileSize": "ขนาดไฟล์",
+      "framerate": "เฟรมเรต",
+      "sampleRate": "อัตราการสุ่ม",
+      "audioChannels": "ช่องเสียง",
+      "container": "รูปแบบคอนเทนเนอร์"
+    },
+    "tooltips": {
+      "addNew": "เพิ่มการแปลงใหม่",
+      "stopAll": "หยุดการแปลงที่กำลังทำงานทั้งหมด",
+      "clearHistory": "ล้างประวัติการแปลง",
+      "resolutionInfo": "ความละเอียดสูงขึ้น = คุณภาพดีขึ้นแต่ไฟล์ใหญ่ขึ้น",
+      "bitrateInfo": "บิตเรตสูงขึ้น = คุณภาพดีขึ้นแต่ไฟล์ใหญ่ขึ้น",
+      "engineInfo": "การเร่งความเร็วด้วยฮาร์ดแวร์ช่วยให้เข้ารหัสได้เร็วขึ้น",
+      "codecInfo": "ตัวเข้ารหัสแต่ละตัวมีข้อดีข้อเสียด้านคุณภาพและความเข้ากันได้",
+      "formatInfo": "เลือกรูปแบบเอาต์พุตตามความต้องการและความเข้ากันได้",
+      "qualityInfo": "สมดุลระหว่างคุณภาพและขนาดไฟล์"
+    },
+    "errors": {
+      "fileSelection": "เกิดข้อผิดพลาดในการเลือกไฟล์",
+      "destinationSelection": "เกิดข้อผิดพลาดในการเลือกโฟลเดอร์ปลายทาง",
+      "noFileSelected": "กรุณาเลือกไฟล์ต้นฉบับ",
+      "noFormatSelected": "กรุณาเลือกรูปแบบเอาต์พุต",
+      "noDestination": "กรุณาเลือกตำแหน่งเอาต์พุต",
+      "invalidResolution": "รูปแบบความละเอียดไม่ถูกต้อง (เช่น 1920x1080)",
+      "invalidBitrate": "รูปแบบบิตเรตไม่ถูกต้อง (เช่น 5000k)",
+      "invalidFramerate": "เฟรมเรตไม่ถูกต้อง (เช่น 60)",
+      "conversionFailed": "การแปลงล้มเหลว",
+      "unsupportedCodec": "ไม่รองรับตัวเข้ารหัสที่เลือกสำหรับรูปแบบนี้",
+      "insufficientSpace": "พื้นที่ดิสก์ไม่เพียงพอ",
+      "invalidFile": "ไฟล์ไม่ถูกต้องหรือเสียหาย",
+      "accessDenied": "ไม่สามารถเข้าถึงตำแหน่งเอาต์พุต",
+      "engineNotAvailable": "ไม่พบเอนจินเข้ารหัสที่เลือก"
+    },
+    "confirmations": {
+      "stopConversion": "คุณแน่ใจหรือไม่ที่จะหยุดการแปลงนี้?",
+      "stopAllConversions": "คุณแน่ใจหรือไม่ที่จะหยุดการแปลงที่กำลังทำงานทั้งหมด?",
+      "clearHistory": "คุณแน่ใจหรือไม่ที่จะล้างประวัติการแปลง?",
+      "clearActiveWarning": "มีการแปลงที่กำลังทำงานอยู่ คุณแน่ใจหรือไม่ที่จะล้างประวัติ?",
+      "deleteConversion": "คุณแน่ใจหรือไม่ที่จะลบการแปลงนี้ออกจากประวัติ?"
+    },
+    "progress": {
+      "preparing": "กำลังเตรียมการแปลง...",
+      "analyzing": "กำลังวิเคราะห์สื่อ...",
+      "converting": "กำลังแปลง: {progress}%",
+      "finalizing": "กำลังเสร็จสิ้น...",
+      "estimatedTime": "เวลาที่เหลือ: {time}",
+      "processingSpeed": "ความเร็ว: {speed}"
+    }
+  },
+  "menu": {
+    "file": {
+      "title": "ไฟล์",
+      "newProject": "โปรเจกต์ใหม่",
+      "openProject": "เปิดโปรเจกต์",
+      "openRecent": "เปิดล่าสุด",
+      "save": "บันทึก",
+      "saveAs": "บันทึกเป็น...",
+      "export": "ส่งออก",
+      "projectSettings": "ตั้งค่าโปรเจกต์",
+      "exit": "ออก"
+    },
+    "edit": {
+      "title": "แก้ไข",
+      "undo": "เลิกทำ",
+      "redo": "ทำซ้ำ",
+      "cut": "ตัด",
+      "copy": "คัดลอก",
+      "paste": "วาง",
+      "delete": "ลบ",
+      "selectAll": "เลือกทั้งหมด",
+      "deselect": "ยกเลิกการเลือก",
+      "preferences": "การตั้งค่า"
+    },
+    "view": {
+      "title": "มุมมอง",
+      "zoomIn": "ขยายเข้า",
+      "zoomOut": "ขยายออก",
+      "resetZoom": "รีเซ็ตการขยาย",
+      "toggleFullscreen": "สลับเต็มจอ",
+      "showSidebar": "แสดงแถบข้าง",
+      "showConsole": "แสดงคอนโซล",
+      "showStatusBar": "แสดงแถบสถานะ",
+      "theme": {
+        "title": "ธีม",
+        "light": "สว่าง",
+        "dark": "มืด",
+        "system": "ระบบ"
+      }
+    },
+    "tools": {
+      "title": "เครื่องมือ",
+      "downloadManager": "ตัวจัดการดาวน์โหลด",
+      "batchConverter": "ตัวแปลงไฟล์แบบกลุ่ม",
+      "audioExtractor": "ตัวแยกเสียง",
+      "videoRemuxer": "ตัวแปลงวิดีโอ",
+      "formatSettings": "ตั้งค่ารูปแบบ",
+      "qualityPresets": "ค่าคุณภาพที่ตั้งไว้",
+      "developerTools": "เครื่องมือนักพัฒนา"
+    },
+    "more": {
+      "title": "เพิ่มเติม",
+      "checkUpdates": "ตรวจสอบการอัพเดท",
+      "documentation": "เอกสารประกอบ",
+      "keyboardShortcuts": "ปุ่มลัดคีย์บอร์ด",
+      "reportIssue": "รายงานปัญหา",
+      "supportForum": "ฟอรั่มช่วยเหลือ",
+      "about": "เกี่ยวกับ"
     }
   }
 }

@@ -1,0 +1,7 @@
+# ./Cargo.toml
+[workspace]
+members = [
+    "src-tauri",
+    "src-cli"
+]
+resolver = "2" 

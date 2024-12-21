@@ -432,5 +432,300 @@
       "community": "the open source community",
       "copyright": "© {{year}} All rights reserved"
     }
+  },
+  "converter": {
+    "title": "Media Converter",
+    "actions": {
+      "addNew": "Add New",
+      "addFirst": "Add First Conversion",
+      "stopAll": "Stop All",
+      "clearHistory": "Clear History",
+      "stop": "Stop",
+      "delete": "Delete",
+      "openFile": "Open File",
+      "openFolder": "Open Folder",
+      "showDetails": "Show Details",
+      "hideDetails": "Hide Details"
+    },
+    "status": {
+      "active": "active",
+      "converting": "Converting",
+      "waiting": "Waiting",
+      "completed": "Completed",
+      "failed": "Failed",
+      "stopped": "Stopped",
+      "loading": "Loading conversions...",
+      "noConversions": "No conversions found",
+      "preparing": "Preparing...",
+      "analyzing": "Analyzing media...",
+      "finalizing": "Finalizing..."
+    },
+    "search": {
+      "placeholder": "Search conversions..."
+    },
+    "modal": {
+      "title": "Add New Conversion",
+      "input": "Input File",
+      "output": "Output Location",
+      "selectFile": "Select media file",
+      "selectDestination": "Select output folder",
+      "mediaFiles": "Media Files",
+      "browse": "Browse",
+      "format": "Output Format",
+      "selectFormat": "Select format",
+      "qualityTitle": "Quality Preset",
+      "qualityHigh": "High Quality",    
+      "qualityMedium": "Medium Quality", 
+      "qualityLow": "Low Quality",      
+      "qualityCustom": "Custom",        
+      "videoSettings": "Video Settings",
+      "audioSettings": "Audio Settings",
+      "videoCodec": "Video Codec",
+      "audioCodec": "Audio Codec",
+      "encodingEngine": "Encoding Engine",
+      "audioEngine": "Audio Engine",
+      "resolution": "Resolution",
+      "videoBitrate": "Video Bitrate",
+      "audioBitrate": "Audio Bitrate",
+      "framerate": "Frame Rate",
+      "sampleRate": "Sample Rate",
+      "channels": "Audio Channels",
+      "processing": "Processing...",
+      "convert": "Start Conversion",
+      "cancel": "Cancel"
+    },
+    "formats": {
+      "video": {
+        "mp4": {
+          "name": "MP4",
+          "description": "MPEG-4 Video"
+        },
+        "mkv": {
+          "name": "MKV",
+          "description": "Matroska Video"
+        },
+        "webm": {
+          "name": "WebM",
+          "description": "Web Video Format"
+        },
+        "avi": {
+          "name": "AVI",
+          "description": "Audio Video Interleave"
+        }
+      },
+      "audio": {
+        "mp3": {
+          "name": "MP3",
+          "description": "MPEG Audio Layer III"
+        },
+        "aac": {
+          "name": "AAC",
+          "description": "Advanced Audio Coding"
+        },
+        "wav": {
+          "name": "WAV",
+          "description": "Waveform Audio"
+        },
+        "flac": {
+          "name": "FLAC",
+          "description": "Free Lossless Audio Codec"
+        },
+        "opus": {
+          "name": "Opus",
+          "description": "Opus Interactive Audio"
+        }
+      }
+    },
+    "codecs": {
+      "video": {
+        "h264": {
+          "name": "H.264/AVC",
+          "description": "Advanced Video Coding",
+          "engines": {
+            "cpu": "CPU (Software)",
+            "qsv": "Intel QuickSync",
+            "nvenc": "NVIDIA NVENC",
+            "amf": "AMD AMF"
+          }
+        },
+        "hevc": {
+          "name": "H.265/HEVC",
+          "description": "High Efficiency Video Coding",
+          "engines": {
+            "cpu": "CPU (Software)",
+            "qsv": "Intel QuickSync",
+            "nvenc": "NVIDIA NVENC",
+            "amf": "AMD AMF"
+          }
+        },
+        "av1": {
+          "name": "AV1",
+          "description": "AOMedia Video 1",
+          "engines": {
+            "cpu": "CPU (SVT-AV1)",
+            "qsv": "Intel QuickSync",
+            "aom": "AOM Reference"
+          }
+        }
+      },
+      "audio": {
+        "aac": {
+          "name": "AAC",
+          "description": "Advanced Audio Coding",
+          "engines": {
+            "default": "FFmpeg AAC"
+          }
+        },
+        "opus": {
+          "name": "Opus",
+          "description": "Opus Interactive Audio Codec",
+          "engines": {
+            "default": "libopus"
+          }
+        },
+        "mp3": {
+          "name": "MP3",
+          "description": "MPEG Audio Layer III",
+          "engines": {
+            "default": "LAME MP3"
+          }
+        }
+      }
+    },
+    "channels": {
+      "mono": "Mono (1)",
+      "stereo": "Stereo (2)",
+      "surround51": "5.1 Surround (6)",
+      "surround71": "7.1 Surround (8)"
+    },
+    "quality": {
+      "presets": {
+        "high": {
+          "name": "High",
+          "description": "Best quality, larger file size"
+        },
+        "medium": {
+          "name": "Medium",
+          "description": "Balanced quality and size"
+        },
+        "low": {
+          "name": "Low",
+          "description": "Smaller file size, reduced quality"
+        }
+      }
+    },
+    "info": {
+      "resolution": "Resolution",
+      "duration": "Duration",
+      "bitrate": "Bitrate",
+      "codec": "Current Codec",
+      "fileSize": "File Size",
+      "framerate": "Frame Rate",
+      "sampleRate": "Sample Rate",
+      "audioChannels": "Audio Channels",
+      "container": "Container Format"
+    },
+    "tooltips": {
+      "addNew": "Add new conversion",
+      "stopAll": "Stop all active conversions",
+      "clearHistory": "Clear conversion history",
+      "resolutionInfo": "Higher resolution means better quality but larger file size",
+      "bitrateInfo": "Higher bitrate means better quality but larger file size",
+      "engineInfo": "Hardware acceleration can provide faster encoding",
+      "codecInfo": "Different codecs offer various quality and compatibility trade-offs",
+      "formatInfo": "Choose output format based on your needs and compatibility",
+      "qualityInfo": "Balance between quality and file size"
+    },
+    "errors": {
+      "fileSelection": "Error selecting file",
+      "destinationSelection": "Error selecting destination folder",
+      "noFileSelected": "Please select an input file",
+      "noFormatSelected": "Please select an output format",
+      "noDestination": "Please select an output location",
+      "invalidResolution": "Invalid resolution format (e.g., 1920x1080)",
+      "invalidBitrate": "Invalid bitrate format (e.g., 5000k)",
+      "invalidFramerate": "Invalid frame rate (e.g., 60)",
+      "conversionFailed": "Conversion failed to start",
+      "unsupportedCodec": "Selected codec is not supported for this format",
+      "insufficientSpace": "Insufficient disk space",
+      "invalidFile": "Invalid or corrupted input file",
+      "accessDenied": "Access denied to output location",
+      "engineNotAvailable": "Selected encoding engine is not available"
+    },
+    "confirmations": {
+      "stopConversion": "Are you sure you want to stop this conversion?",
+      "stopAllConversions": "Are you sure you want to stop all active conversions?",
+      "clearHistory": "Are you sure you want to clear the conversion history?",
+      "clearActiveWarning": "There are active conversions. Are you sure you want to clear the history?",
+      "deleteConversion": "Are you sure you want to delete this conversion from history?"
+    },
+    "progress": {
+      "preparing": "Preparing conversion...",
+      "analyzing": "Analyzing media...",
+      "converting": "Converting: {progress}%",
+      "finalizing": "Finalizing...",
+      "estimatedTime": "Estimated time: {time}",
+      "processingSpeed": "Speed: {speed}"
+    }
+  },
+  "menu": {
+    "file": {
+      "title": "File",
+      "newProject": "New Project",
+      "openProject": "Open Project",
+      "openRecent": "Open Recent",
+      "save": "Save",
+      "saveAs": "Save As...",
+      "export": "Export",
+      "projectSettings": "Project Settings",
+      "exit": "Exit"
+    },
+    "edit": {
+      "title": "Edit",
+      "undo": "Undo",
+      "redo": "Redo",
+      "cut": "Cut",
+      "copy": "Copy",
+      "paste": "Paste",
+      "delete": "Delete",
+      "selectAll": "Select All",
+      "deselect": "Deselect",
+      "preferences": "Preferences"
+    },
+    "view": {
+      "title": "View",
+      "zoomIn": "Zoom In",
+      "zoomOut": "Zoom Out",
+      "resetZoom": "Reset Zoom",
+      "toggleFullscreen": "Toggle Fullscreen",
+      "showSidebar": "Show Sidebar",
+      "showConsole": "Show Console",
+      "showStatusBar": "Show Status Bar",
+      "theme": {
+        "title": "Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      }
+    },
+    "tools": {
+      "title": "Tools",
+      "downloadManager": "Download Manager",
+      "batchConverter": "Batch Converter",
+      "audioExtractor": "Audio Extractor",
+      "videoRemuxer": "Video Remuxer",
+      "formatSettings": "Format Settings",
+      "qualityPresets": "Quality Presets",
+      "developerTools": "Developer Tools"
+    },
+    "more": {
+      "title": "More",
+      "checkUpdates": "Check for Updates",
+      "documentation": "Documentation",
+      "keyboardShortcuts": "Keyboard Shortcuts",
+      "reportIssue": "Report Issue",
+      "supportForum": "Support Forum",
+      "about": "About"
+    }
   }
 }

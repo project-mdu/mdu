@@ -1,7 +1,5 @@
 // src-tauri/src/processing/mod.rs
 pub mod services;
-pub mod postprocess;
-
 use std::error::Error;
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
@@ -41,7 +39,7 @@ pub struct MediaInfo {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ProcessingOptions {
-    pub convert_to: Option<postprocess::ProcessingType>,
+    // pub convert_to: Option<postprocess::ProcessingType>,
     pub output_template: Option<String>,
     pub quality_preset: Option<String>,
 }
@@ -51,7 +49,7 @@ pub struct DownloadResult {
     pub file_path: String,
     pub format: Format,
     pub processed: bool,
-    pub processing_info: Option<postprocess::ProcessingProgress>,
+    // pub processing_info: Option<postprocess::ProcessingProgress>,
 }
 
 #[async_trait]
@@ -61,9 +59,10 @@ pub trait MediaExtractor: Send + Sync {
 }
 
 // Re-export types from postprocess module
-pub use postprocess::ffmpeg::{FFmpeg, FFmpegError, VideoCodec, EncoderPreset, ProcessingProgress};
-pub use postprocess::{ProcessingTask, ProcessingType, AudioFormat};
+// pub use postprocess::ffmpeg::{FFmpeg, FFmpegError, VideoCodec, EncoderPreset, ProcessingProgress};
+// pub use postprocess::{ProcessingTask, ProcessingType, AudioFormat};
 
+#[allow(dead_code)]
 pub fn get_default_output_template() -> String {
     String::from("%(title)s.%(ext)s")
 }
@@ -73,6 +72,7 @@ pub fn sanitize_filename(filename: &str) -> String {
     invalid_chars.replace_all(filename, "_").trim().to_string()
 }
 
+#[allow(dead_code)]
 pub fn format_output_path(
     template: &str,
     info: &MediaInfo,
