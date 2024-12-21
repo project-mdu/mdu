@@ -1,0 +1,3 @@
+[submodule "external/cef"]
+	path = external/cef
+	url = https://github.com/chromiumembedded/cef.git
